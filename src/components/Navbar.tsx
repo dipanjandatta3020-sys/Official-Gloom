@@ -46,6 +46,7 @@ export default function Navbar() {
       }}
     >
       <div
+        className="navbar-inner"
         style={{
           width: '100%',
           maxWidth: '1526px',
@@ -78,6 +79,7 @@ export default function Navbar() {
 
         {/* Desktop nav links with reveal animation */}
         <div
+          className="navbar-links"
           style={{
             display: 'flex',
             alignItems: 'center',

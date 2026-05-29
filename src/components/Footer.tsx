@@ -3,6 +3,7 @@ import { Instagram, Youtube, Github, Facebook, Dribbble } from 'lucide-react';
 export default function Footer() {
   return (
     <footer
+      className="footer-section"
       style={{
         backgroundColor: '#050505',
         color: '#ffffff',
@@ -13,6 +14,7 @@ export default function Footer() {
       }}
     >
       <div
+        className="footer-container"
         style={{
           maxWidth: '1528px',
           margin: '0 auto',
@@ -22,10 +24,10 @@ export default function Footer() {
         }}
       >
         {/* Top Section */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '160px' }}>
+        <div className="footer-top" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '160px' }}>
           
           {/* Left: Contacts */}
-          <div style={{ display: 'flex', gap: '80px' }}>
+          <div className="footer-contacts" style={{ display: 'flex', gap: '80px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
               <button
                 style={{
@@ -80,7 +82,7 @@ export default function Footer() {
           </div>
 
           {/* Right: Links */}
-          <div style={{ display: 'flex', gap: '80px', paddingRight: '80px' }}>
+          <div className="footer-nav-links" style={{ display: 'flex', gap: '80px', paddingRight: '80px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
               {['Services', 'Projects', 'Company'].map(link => (
                 <a
@@ -121,7 +123,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="footer-bottom" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ display: 'flex', gap: '40px' }}>
             <a
               href="#privacy"
@@ -139,7 +141,7 @@ export default function Footer() {
             <span style={{ color: '#aaaaaa', fontSize: '14px' }}>2026, Gloom</span>
           </div>
 
-          <div style={{ display: 'flex', gap: '16px', paddingRight: '200px' }}>
+          <div className="footer-social" style={{ display: 'flex', gap: '16px', paddingRight: '200px' }}>
             {[Instagram, Youtube, Github, Facebook, Dribbble].map((Icon, i) => (
               <a
                 key={i}

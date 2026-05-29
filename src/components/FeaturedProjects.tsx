@@ -34,6 +34,7 @@ const projects = [
 export default function FeaturedProjects() {
   return (
     <section
+      className="featured-section"
       style={{
         padding: '120px 0 200px 0',
         backgroundColor: '#050505',
@@ -43,6 +44,7 @@ export default function FeaturedProjects() {
       }}
     >
       <div
+        className="featured-container"
         style={{
           maxWidth: '1529px',
           margin: '0 auto',
@@ -63,6 +65,7 @@ export default function FeaturedProjects() {
         </h2>
 
         <div
+          className="featured-grid"
           style={{
             display: 'flex',
             flexDirection: 'row',
@@ -71,6 +74,7 @@ export default function FeaturedProjects() {
         >
           {/* Left Column */}
           <div
+            className="featured-col"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -81,6 +85,7 @@ export default function FeaturedProjects() {
             {projects.filter((_, i) => i % 2 === 0).map((project) => (
               <div key={project.id} style={{ display: 'flex', flexDirection: 'column', cursor: 'pointer' }}>
                 <div
+                  className="featured-card-img"
                   style={{
                     width: '482px',
                     height: '651px',
@@ -119,6 +124,7 @@ export default function FeaturedProjects() {
 
           {/* Right Column */}
           <div
+            className="featured-col featured-col-right"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -130,6 +136,7 @@ export default function FeaturedProjects() {
             {projects.filter((_, i) => i % 2 !== 0).map((project) => (
               <div key={project.id} style={{ display: 'flex', flexDirection: 'column', cursor: 'pointer' }}>
                 <div
+                  className="featured-card-img"
                   style={{
                     width: '482px',
                     height: '651px',

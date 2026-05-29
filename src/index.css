@@ -106,3 +106,186 @@ body {
 .cta-btn-light:hover {
   color: #050505;
 }
+
+/* ================================== */
+/* Mobile Responsive Styles (<= 768px) */
+/* ================================== */
+@media (max-width: 768px) {
+
+  /* --- Navbar --- */
+  .navbar-inner {
+    padding: 16px 20px !important;
+  }
+  .navbar-links {
+    display: none !important;
+  }
+
+  /* --- Hero --- */
+  .hero-section {
+    padding-top: 120px !important;
+  }
+  .hero-word-gap {
+    gap: 8px !important;
+  }
+  .hero-video-wrapper {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    margin-top: 60px !important;
+  }
+  .hero-video {
+    height: auto !important;
+    aspect-ratio: 16 / 9;
+    border-radius: 16px !important;
+  }
+
+  /* --- Services (video + text section) --- */
+  .services-section {
+    flex-direction: column !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 80px !important;
+    padding-bottom: 80px !important;
+    gap: 40px !important;
+    align-items: center !important;
+  }
+  .services-video-col {
+    width: 100% !important;
+  }
+  .services-video-box {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 1 / 1;
+    border-radius: 24px !important;
+  }
+  .services-text-col {
+    width: 100% !important;
+    margin-top: 0 !important;
+    text-align: center;
+  }
+
+  /* --- Featured Projects --- */
+  .featured-section {
+    border-radius: 40px 40px 0 0 !important;
+    padding-top: 80px !important;
+    padding-bottom: 100px !important;
+  }
+  .featured-container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .featured-grid {
+    flex-direction: column !important;
+    gap: 48px !important;
+  }
+  .featured-col {
+    width: 100% !important;
+  }
+  .featured-col-right {
+    margin-top: 0 !important;
+  }
+  .featured-card-img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 482 / 651;
+    border-radius: 20px !important;
+  }
+
+  /* --- Our Services --- */
+  .ourservices-section {
+    border-radius: 40px 40px 0 0 !important;
+    padding-top: 80px !important;
+    padding-bottom: 100px !important;
+  }
+  .ourservices-container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .ourservices-desc {
+    font-size: 18px !important;
+  }
+  .ourservices-grid {
+    flex-direction: column !important;
+    gap: 48px !important;
+  }
+  .ourservices-col {
+    width: 100% !important;
+  }
+  .ourservices-col-right {
+    margin-top: 0 !important;
+  }
+  .ourservices-card-img {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 480 / 648;
+    border-radius: 20px !important;
+  }
+
+  /* --- CTA Buttons (global mobile override) --- */
+  .cta-btn {
+    width: 220px !important;
+    height: 60px !important;
+    font-size: 15px !important;
+  }
+
+  /* --- Contact CTA --- */
+  .contact-cta-section {
+    min-height: 500px !important;
+    border-radius: 24px 24px 0 0 !important;
+    margin-top: 20px !important;
+  }
+  .contact-cta-heading {
+    font-size: clamp(2.5rem, 12vw, 4rem) !important;
+  }
+  .contact-cta-btn-wrap {
+    padding: 16px 40px !important;
+  }
+  .contact-cta-btn-text {
+    font-size: clamp(1.5rem, 8vw, 2.5rem) !important;
+  }
+
+  /* --- Footer --- */
+  .footer-section {
+    padding-top: 60px !important;
+    padding-bottom: 40px !important;
+  }
+  .footer-container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .footer-top {
+    flex-direction: column !important;
+    gap: 48px !important;
+    margin-bottom: 60px !important;
+  }
+  .footer-contacts {
+    flex-direction: column !important;
+    gap: 40px !important;
+  }
+  .footer-nav-links {
+    gap: 40px !important;
+    padding-right: 0 !important;
+  }
+  .footer-bottom {
+    flex-direction: column !important;
+    gap: 24px !important;
+    align-items: flex-start !important;
+  }
+  .footer-social {
+    padding-right: 0 !important;
+    flex-wrap: wrap;
+  }
+
+  /* --- Floating Contact --- */
+  .floating-contact-wrapper {
+    bottom: 16px !important;
+    right: 16px !important;
+  }
+  .floating-contact-circle {
+    width: 90px !important;
+    height: 90px !important;
+  }
+  .floating-contact-logo {
+    width: 75px !important;
+    height: 75px !important;
+  }
+}

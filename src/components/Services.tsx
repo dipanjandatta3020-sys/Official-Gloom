@@ -1,6 +1,7 @@
 export default function Services() {
   return (
     <section
+      className="services-section"
       style={{
         width: '100%',
         maxWidth: '1524px',
@@ -16,8 +17,9 @@ export default function Services() {
       }}
     >
       {/* Left side: Video */}
-      <div style={{ width: '480px', flexShrink: 0 }}>
+      <div className="services-video-col" style={{ width: '480px', flexShrink: 0 }}>
         <div
+          className="services-video-box"
           style={{
             width: '480px',
             height: '480px',
@@ -43,6 +45,7 @@ export default function Services() {
 
       {/* Right side: Text and button */}
       <div
+        className="services-text-col"
         style={{
           width: '510px',
           flexShrink: 0,

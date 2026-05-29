@@ -11,6 +11,7 @@ export default function Hero() {
 
   return (
     <section
+      className="hero-section"
       style={{
         position: 'relative',
         paddingTop: '200px',
@@ -34,7 +35,7 @@ export default function Hero() {
         }}
       >
         {/* Headline line 1 - word by word */}
-        <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', paddingBottom: '8px' }}>
+        <div className="hero-word-gap" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', paddingBottom: '8px' }}>
           {['Digital', 'design', '&'].map((word, i) => (
             <div key={i} style={{ overflow: 'hidden', paddingBottom: '8px' }}>
               <span
@@ -57,7 +58,7 @@ export default function Hero() {
         </div>
 
         {/* Headline line 2 - word by word */}
-        <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '48px' }}>
+        <div className="hero-word-gap" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '48px' }}>
           {['development', 'agency'].map((word, i) => (
             <div key={i} style={{ overflow: 'hidden', paddingBottom: '8px' }}>
               <span
@@ -102,7 +103,7 @@ export default function Hero() {
 
       {/* Video Section */}
       <div
-        className={isVisible ? 'animate-text-reveal animation-delay-500' : ''}
+        className={`hero-video-wrapper ${isVisible ? 'animate-text-reveal animation-delay-500' : ''}`}
         style={{
           marginTop: '100px',
           width: '100%',
@@ -114,6 +115,7 @@ export default function Hero() {
         }}
       >
         <div
+          className="hero-video"
           style={{
             width: '100%',
             maxWidth: '1296px',

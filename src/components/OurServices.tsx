@@ -29,6 +29,7 @@ export default function OurServices() {
   return (
     <section
       ref={ref}
+      className="ourservices-section"
       style={{
         padding: '120px 0 200px 0',
         backgroundColor: '#ffffff',
@@ -40,6 +41,7 @@ export default function OurServices() {
       }}
     >
       <div
+        className="ourservices-container"
         style={{
           maxWidth: '1528px',
           margin: '0 auto',
@@ -59,6 +61,7 @@ export default function OurServices() {
         </h2>
 
         <p
+          className="ourservices-desc"
           style={{
             fontSize: '24px',
             lineHeight: 1.4,
@@ -73,6 +76,7 @@ export default function OurServices() {
         </p>
 
         <div
+          className="ourservices-grid"
           style={{
             display: 'flex',
             flexDirection: 'row',
@@ -81,6 +85,7 @@ export default function OurServices() {
         >
           {/* Left Column */}
           <div
+            className="ourservices-col"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -97,6 +102,7 @@ export default function OurServices() {
                 style={{ display: 'flex', flexDirection: 'column', cursor: 'pointer' }}
               >
                 <div
+                  className="ourservices-card-img"
                   style={{
                     width: '480px',
                     height: '648px',
@@ -144,6 +150,7 @@ export default function OurServices() {
 
           {/* Right Column */}
           <div
+            className="ourservices-col ourservices-col-right"
             style={{
               display: 'flex',
               flexDirection: 'column',
@@ -161,6 +168,7 @@ export default function OurServices() {
                 style={{ display: 'flex', flexDirection: 'column', cursor: 'pointer' }}
               >
                 <div
+                  className="ourservices-card-img"
                   style={{
                     width: '480px',
                     height: '648px',

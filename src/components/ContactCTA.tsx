@@ -21,6 +21,7 @@ export default function ContactCTA() {
   return (
     <section
       ref={ref}
+      className="contact-cta-section"
       style={{
         position: 'relative',
         width: '100%',
@@ -84,7 +85,7 @@ export default function ContactCTA() {
         {/* "Have" line */}
         <div style={{ overflow: 'hidden', paddingBottom: '16px', marginBottom: '-16px' }}>
           <h2
-            className={isInView ? 'animate-text-reveal animation-delay-100' : ''}
+            className={`contact-cta-heading ${isInView ? 'animate-text-reveal animation-delay-100' : ''}`}
             style={{
               fontSize: 'clamp(3rem, 8vw, 8rem)',
               lineHeight: 1.05,
@@ -101,7 +102,7 @@ export default function ContactCTA() {
         {/* "an idea?" line */}
         <div style={{ overflow: 'hidden', paddingBottom: '16px' }}>
           <h2
-            className={isInView ? 'animate-text-reveal animation-delay-200' : ''}
+            className={`contact-cta-heading ${isInView ? 'animate-text-reveal animation-delay-200' : ''}`}
             style={{
               fontSize: 'clamp(3rem, 8vw, 8rem)',
               lineHeight: 1.05,
@@ -122,6 +123,7 @@ export default function ContactCTA() {
           onMouseLeave={() => setIsHovered(false)}
         >
           <div
+            className="contact-cta-btn-wrap"
             style={{
               position: 'relative',
               overflow: 'hidden',
@@ -137,6 +139,7 @@ export default function ContactCTA() {
             }}
           >
             <span
+              className="contact-cta-btn-text"
               style={{
                 position: 'relative',
                 zIndex: 10,

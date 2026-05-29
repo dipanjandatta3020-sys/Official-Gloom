@@ -1,6 +1,7 @@
 export default function FloatingContact() {
   return (
     <div
+      className="floating-contact-wrapper"
       style={{
         position: 'fixed',
         bottom: '40px',
@@ -12,6 +13,7 @@ export default function FloatingContact() {
       }}
     >
       <div
+        className="floating-contact-circle"
         style={{
           position: 'relative',
           width: '140px',
@@ -62,6 +64,7 @@ export default function FloatingContact() {
 
         {/* Inner avatar */}
         <div
+          className="floating-contact-logo"
           style={{
             width: '120px',
             height: '120px',
