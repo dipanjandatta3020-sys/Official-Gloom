@@ -107,6 +107,15 @@ body {
   color: #050505;
 }
 
+/* Mobile Menu Toggle Button */
+.mobile-menu-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #0a0a0a;
+}
+
 /* ================================== */
 /* Mobile Responsive Styles (<= 768px) */
 /* ================================== */
@@ -118,6 +127,11 @@ body {
   }
   .navbar-links {
     display: none !important;
+  }
+  .mobile-menu-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
   }
 
   /* --- Hero --- */
