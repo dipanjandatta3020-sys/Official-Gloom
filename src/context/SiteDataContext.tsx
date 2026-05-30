@@ -1,9 +1,13 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { initialSiteData, SiteData } from '../data/initialData';
+import { db, auth } from '../lib/firebase';
+import { doc, getDoc, setDoc, addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
 
 interface SiteDataContextType {
   data: SiteData;
   isAdmin: boolean;
+  isAuthenticated: boolean;
   setIsAdmin: (val: boolean) => void;
   updateData: (path: string[], value: any) => void;
   saveData: () => void;
@@ -35,35 +39,41 @@ export const SiteDataProvider = ({ children }: { children: ReactNode }) => {
   const [data, setData] = useState<SiteData>(initialSiteData);
   const [isAdmin, setIsAdmin] = useState(false);
 
-  // Load from localStorage on mount
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem('gloom_site_data');
-      if (saved) {
-        const parsedData = JSON.parse(saved);
-        // Merge with initial data to ensure new sections (like footer) exist if not in saved data
-        setData({ ...initialSiteData, ...parsedData });
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setIsAuthenticated(!!user);
+      if (!user && isAdmin) {
+        setIsAdmin(false);
       }
-    } catch (e) {
-      console.error('Failed to load site data', e);
-    }
+    });
+    return () => unsubscribe();
+  }, [isAdmin]);
+
+  // Load from Firestore on mount
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const docSnap = await getDoc(doc(db, 'siteContent', 'main'));
+        if (docSnap.exists()) {
+          const fetchedData = docSnap.data() as SiteData;
+          setData({ ...initialSiteData, ...fetchedData });
+        }
+      } catch (e) {
+        console.error('Failed to load site data from Firestore', e);
+      }
+    };
+    loadData();
     
     // Check if URL hash indicates admin mode activation
     const checkHash = () => {
       if (window.location.hash === '#admin') {
         setIsAdmin(true);
-        localStorage.setItem('gloom_admin_mode', 'true');
         document.body.classList.add('admin-mode');
-        // Redirect to home after activating admin
         window.location.hash = '#home';
       }
     };
-    // Check localStorage for persisted admin mode
-    const storedAdmin = localStorage.getItem('gloom_admin_mode') === 'true';
-    if (storedAdmin) {
-      setIsAdmin(true);
-      document.body.classList.add('admin-mode');
-    }
     checkHash();
     window.addEventListener('hashchange', checkHash);
     return () => window.removeEventListener('hashchange', checkHash);
@@ -74,14 +84,26 @@ export const SiteDataProvider = ({ children }: { children: ReactNode }) => {
     setData(prev => updateNestedProperty(prev, path, value));
   };
 
-  // Persist state to localStorage
-  const saveData = () => {
-    localStorage.setItem('gloom_site_data', JSON.stringify(data));
-    alert('Changes saved locally!');
+  // Persist state to Firestore
+  const saveData = async () => {
+    try {
+      // 1. Archive current version to history first
+      await addDoc(collection(db, 'siteHistory'), {
+        ...data,
+        savedAt: serverTimestamp(),
+      });
+
+      // 2. Write new data
+      await setDoc(doc(db, 'siteContent', 'main'), data);
+      alert('Changes saved to Firebase successfully!');
+    } catch (e) {
+      console.error("Error saving data:", e);
+      alert('Failed to save to Firebase. Check console.');
+    }
   };
 
   return (
-    <SiteDataContext.Provider value={{ data, isAdmin, setIsAdmin, updateData, saveData }}>
+    <SiteDataContext.Provider value={{ data, isAdmin, isAuthenticated, setIsAdmin, updateData, saveData }}>
       {children}
     </SiteDataContext.Provider>
   );

@@ -1,16 +1,20 @@
 import React from 'react';
 import { useSiteData } from '../../context/SiteDataContext';
+import AdminLogin from './AdminLogin';
 
 export default function SaveAdminPanel() {
-  const { isAdmin, saveData, data, updateData, setIsAdmin } = useSiteData();
+  const { isAdmin, isAuthenticated, saveData, data, updateData, setIsAdmin } = useSiteData();
 
   const exitAdmin = () => {
     setIsAdmin(false);
-    localStorage.removeItem('gloom_admin_mode');
     document.body.classList.remove('admin-mode');
   };
 
   if (!isAdmin) return null;
+
+  if (isAdmin && !isAuthenticated) {
+    return <AdminLogin onLogin={() => {}} />;
+  }
 
   return (
     <div style={{
