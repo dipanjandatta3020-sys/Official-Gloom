@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
+import EditableText from './admin/EditableText';
+import EditableMedia from './admin/EditableMedia';
+import { useSiteData } from '../context/SiteDataContext';
 
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false);
+  const { data } = useSiteData();
 
   useEffect(() => {
     // Small delay to ensure CSS animation classes are applied after mount
@@ -85,64 +89,56 @@ export default function Hero() {
         }}
       >
         {/* Headline line 1 - word by word */}
-        <div className="hero-word-gap" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'flex-end' }}>
+        <div className="hero-word-gap" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', paddingBottom: '8px' }}>
           {['Digital', 'design', '&'].map((word, i) => (
-            <span
-              key={i}
-              className={isVisible ? `animate-text-reveal` : ''}
-              style={{
-                fontFamily: '"Outfit", sans-serif',
-                fontSize: 'clamp(3rem, 6vw, 5.5rem)',
-                lineHeight: 'normal',
-                fontWeight: 700,
-                letterSpacing: '-0.02em',
-                color: '#0D0A1A',
-                display: 'inline-block',
-                paddingBottom: '0.2em',
-                marginBottom: '-0.2em',
-                opacity: isVisible ? undefined : 0,
-                WebkitFontSmoothing: 'antialiased',
-                MozOsxFontSmoothing: 'grayscale',
-                textRendering: 'optimizeLegibility' as const,
-                animationDelay: isVisible ? `${0.1 + i * 0.08}s` : undefined,
-                ...(word === 'design' ? {
-                  background: 'linear-gradient(135deg, #7B5CE5, #E040A0)',
-                  WebkitBackgroundClip: 'text',
-                  backgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                } : {}),
-              }}
-            >
-              {word}
-            </span>
+            <div key={i} style={{ overflow: 'hidden', paddingBottom: '8px' }}>
+              <span
+                className={isVisible ? `animate-text-reveal` : ''}
+                style={{
+                  fontFamily: '"Outfit", sans-serif',
+                  fontSize: 'clamp(3rem, 6vw, 5.5rem)',
+                  lineHeight: 1.08,
+                  fontWeight: 700,
+                  letterSpacing: '-0.03em',
+                  color: '#0D0A1A',
+                  display: 'inline-block',
+                  opacity: isVisible ? undefined : 0,
+                  animationDelay: isVisible ? `${0.1 + i * 0.08}s` : undefined,
+                  ...(word === 'design' ? {
+                    background: 'linear-gradient(135deg, #7B5CE5, #E040A0)',
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                  } : {}),
+                }}
+              >
+                {word}
+              </span>
+            </div>
           ))}
         </div>
 
         {/* Headline line 2 - word by word */}
-        <div className="hero-word-gap" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'flex-end', marginBottom: '48px' }}>
+        <div className="hero-word-gap" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '48px' }}>
           {['development', 'agency'].map((word, i) => (
-            <span
-              key={i}
-              className={isVisible ? `animate-text-reveal` : ''}
-              style={{
-                fontFamily: '"Outfit", sans-serif',
-                fontSize: 'clamp(3rem, 6vw, 5.5rem)',
-                lineHeight: 'normal',
-                fontWeight: 700,
-                letterSpacing: '-0.02em',
-                color: '#0D0A1A',
-                display: 'inline-block',
-                paddingBottom: '0.2em',
-                marginBottom: '-0.2em',
-                opacity: isVisible ? undefined : 0,
-                WebkitFontSmoothing: 'antialiased',
-                MozOsxFontSmoothing: 'grayscale',
-                textRendering: 'optimizeLegibility' as const,
-                animationDelay: isVisible ? `${0.34 + i * 0.08}s` : undefined,
-              }}
-            >
-              {word}
-            </span>
+            <div key={i} style={{ overflow: 'hidden', paddingBottom: '8px' }}>
+              <span
+                className={isVisible ? `animate-text-reveal` : ''}
+                style={{
+                  fontFamily: '"Outfit", sans-serif',
+                  fontSize: 'clamp(3rem, 6vw, 5.5rem)',
+                  lineHeight: 1.08,
+                  fontWeight: 700,
+                  letterSpacing: '-0.03em',
+                  color: '#0D0A1A',
+                  display: 'inline-block',
+                  opacity: isVisible ? undefined : 0,
+                  animationDelay: isVisible ? `${0.34 + i * 0.08}s` : undefined,
+                }}
+              >
+                {word}
+              </span>
+            </div>
           ))}
         </div>
 
@@ -197,12 +193,9 @@ export default function Hero() {
             boxShadow: '0 20px 80px rgba(123, 92, 229, 0.12), 0 4px 24px rgba(13, 10, 26, 0.06)',
           }}
         >
-          <video
-            src="https://media.w3.org/2010/05/sintel/trailer.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
+          <EditableMedia
+            path={['home', 'video', 'url']}
+            type="video"
             style={{
               width: '100%',
               height: '100%',

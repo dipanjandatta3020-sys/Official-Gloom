@@ -1,41 +1,15 @@
 import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
-
 import ImageSlideshow from './ImageSlideshow';
-
-const servicesData = [
-  {
-    id: 1,
-    title: 'Brand Identity',
-    description: 'Strategic design that positions AI products for trust and clarity.',
-    images: [
-      'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&w=480&h=648&fit=crop',
-      'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=480&h=648&fit=crop'
-    ],
-  },
-  {
-    id: 2,
-    title: 'AI-enhanced UX/UI design',
-    description: 'Interfaces that adapt, predict, and respond intelligently.',
-    images: [
-      'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=480&h=648&fit=crop',
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=480&h=648&fit=crop'
-    ],
-  },
-  {
-    id: 3,
-    title: 'Custom development',
-    description: 'Frontend + backend + AI integrations — built for performance and scalability.',
-    images: [
-      'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=480&h=648&fit=crop',
-      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=480&h=648&fit=crop'
-    ],
-  },
-];
+import EditableText from './admin/EditableText';
+import EditableImageArray from './admin/EditableImageArray';
+import { useSiteData } from '../context/SiteDataContext';
 
 export default function OurServices({ openServices }: { openServices: () => void }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-10%' });
+  const { data } = useSiteData();
+  const servicesData = data.ourServices.cards;
 
   return (
     <section
@@ -125,7 +99,9 @@ export default function OurServices({ openServices }: { openServices: () => void
           padding: '0 230px',
         }}
       >
-        <h2
+        <EditableText
+          path={['ourServices', 'heading']}
+          as="h2"
           style={{
             fontFamily: '"Outfit", sans-serif',
             fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
@@ -134,12 +110,13 @@ export default function OurServices({ openServices }: { openServices: () => void
             color: '#0D0A1A',
             marginBottom: '40px',
             lineHeight: 1.1,
+            display: 'block'
           }}
-        >
-          Our services
-        </h2>
+        />
 
-        <p
+        <EditableText
+          path={['ourServices', 'description']}
+          as="p"
           className="ourservices-desc"
           style={{
             fontFamily: '"Inter", sans-serif',
@@ -149,11 +126,9 @@ export default function OurServices({ openServices }: { openServices: () => void
             color: '#6B5F8A',
             maxWidth: '500px',
             marginBottom: '80px',
+            display: 'block'
           }}
-        >
-          From motion design to AI-powered products — we design and build
-          interfaces for the future.
-        </p>
+        />
 
         <div
           className="ourservices-grid"
@@ -193,7 +168,9 @@ export default function OurServices({ openServices }: { openServices: () => void
                     marginBottom: '20px',
                   }}
                 >
-                  <ImageSlideshow images={service.images} />
+                  <EditableImageArray path={['ourServices', 'cards', servicesData.findIndex((s: any) => s.id === service.id).toString(), 'images']} images={service.images}>
+                    <ImageSlideshow images={service.images} />
+                  </EditableImageArray>
                 </div>
                 <h3
                   style={{
@@ -204,19 +181,20 @@ export default function OurServices({ openServices }: { openServices: () => void
                     margin: '0 0 8px 0',
                   }}
                 >
-                  {service.title}
+                  <EditableText path={['ourServices', 'cards', servicesData.findIndex((s: any) => s.id === service.id).toString(), 'title']} />
                 </h3>
-                <p
+                <EditableText
+                  path={['ourServices', 'cards', servicesData.findIndex((s: any) => s.id === service.id).toString(), 'description']}
+                  as="p"
                   style={{
                     fontFamily: '"Inter", sans-serif',
                     fontSize: '15px',
                     color: '#6B5F8A',
                     margin: 0,
                     lineHeight: 1.65,
+                    display: 'block'
                   }}
-                >
-                  {service.description}
-                </p>
+                />
               </motion.div>
             ))}
           </div>
@@ -252,7 +230,9 @@ export default function OurServices({ openServices }: { openServices: () => void
                     marginBottom: '20px',
                   }}
                 >
-                  <ImageSlideshow images={service.images} />
+                  <EditableImageArray path={['ourServices', 'cards', servicesData.findIndex((s: any) => s.id === service.id).toString(), 'images']} images={service.images}>
+                    <ImageSlideshow images={service.images} />
+                  </EditableImageArray>
                 </div>
                 <h3
                   style={{
@@ -263,19 +243,20 @@ export default function OurServices({ openServices }: { openServices: () => void
                     margin: '0 0 8px 0',
                   }}
                 >
-                  {service.title}
+                  <EditableText path={['ourServices', 'cards', servicesData.findIndex((s: any) => s.id === service.id).toString(), 'title']} />
                 </h3>
-                <p
+                <EditableText
+                  path={['ourServices', 'cards', servicesData.findIndex((s: any) => s.id === service.id).toString(), 'description']}
+                  as="p"
                   style={{
                     fontFamily: '"Inter", sans-serif',
                     fontSize: '15px',
                     color: '#6B5F8A',
                     margin: 0,
                     lineHeight: 1.65,
+                    display: 'block'
                   }}
-                >
-                  {service.description}
-                </p>
+                />
               </motion.div>
             ))}
           </div>

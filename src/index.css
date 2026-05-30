@@ -368,3 +368,18 @@ body {
   50%  { opacity: 1;   transform: translateX(-50%) scale(1.05); }
   100% { opacity: 0.9; transform: translateX(-50%) scale(1); }
 }
+
+/* Admin Mode Overrides */
+body.admin-mode .animate-text-reveal {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+body.admin-mode .hero-video-wrapper,
+body.admin-mode .featured-card-img {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}

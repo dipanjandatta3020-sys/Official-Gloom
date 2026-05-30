@@ -1,4 +1,9 @@
+import EditableText from './admin/EditableText';
+import EditableMedia from './admin/EditableMedia';
+import { useSiteData } from '../context/SiteDataContext';
+
 export default function Services({ openServices }: { openServices: () => void }) {
+  const { data } = useSiteData();
   return (
     <section
       className="services-section"
@@ -60,12 +65,9 @@ export default function Services({ openServices }: { openServices: () => void })
             boxShadow: '0 0 60px rgba(123, 92, 229, 0.08)',
           }}
         >
-          <video
-            src="https://www.w3schools.com/html/mov_bbb.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
+          <EditableMedia
+            path={['homeServices', 'videoUrl']}
+            type="video"
             style={{
               width: '100%',
               height: '100%',
@@ -90,7 +92,9 @@ export default function Services({ openServices }: { openServices: () => void })
           zIndex: 1,
         }}
       >
-        <h2
+        <EditableText
+          path={['homeServices', 'heading']}
+          as="h2"
           style={{
             fontFamily: '"Outfit", sans-serif',
             fontSize: 'clamp(1.4rem, 2vw, 1.85rem)',
@@ -98,14 +102,13 @@ export default function Services({ openServices }: { openServices: () => void })
             fontWeight: 700,
             color: '#0D0A1A',
             margin: 0,
+            display: 'block'
           }}
-        >
-          Since 2010, we have been helping our clients find exceptional
-          solutions for their businesses, creating memorable websites and
-          digital products.
-        </h2>
+        />
 
-        <p
+        <EditableText
+          path={['homeServices', 'description']}
+          as="p"
           style={{
             fontFamily: '"Inter", sans-serif',
             fontSize: 'clamp(1rem, 1.2vw, 1.15rem)',
@@ -113,11 +116,9 @@ export default function Services({ openServices }: { openServices: () => void })
             color: '#6B5F8A',
             fontWeight: 400,
             margin: 0,
+            display: 'block'
           }}
-        >
-          Gloom doesn't do cookie-cutter solutions and we build products
-          exactly as they were designed, no shortcuts or simplifications.
-        </p>
+        />
 
         <button
           className="cta-btn cta-btn-on-light"

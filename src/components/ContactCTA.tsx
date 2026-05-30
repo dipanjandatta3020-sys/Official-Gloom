@@ -1,8 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
+import EditableText from './admin/EditableText';
+import { useSiteData } from '../context/SiteDataContext';
 
 export default function ContactCTA() {
   const ref = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
+  const { data } = useSiteData();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -60,26 +63,29 @@ export default function ContactCTA() {
       >
         {/* "Have" line */}
         <div style={{ overflow: 'hidden', paddingBottom: '16px', marginBottom: '-16px' }}>
-          <h2
-            className={`contact-cta-heading ${isInView ? 'animate-text-reveal animation-delay-100' : ''}`}
-            style={{
-              fontFamily: '"Outfit", sans-serif',
-              fontSize: 'clamp(3rem, 8vw, 8rem)',
-              lineHeight: 1.05,
-              fontWeight: 700,
-              letterSpacing: '-0.03em',
-              color: '#F0EBF8',
-              margin: 0,
-              opacity: isInView ? undefined : 0,
-            }}
-          >
-            Have
-          </h2>
+            <EditableText
+              path={['contact', 'line1']}
+              as="h2"
+              className={`contact-cta-heading ${isInView ? 'animate-text-reveal animation-delay-100' : ''}`}
+              style={{
+                fontFamily: '"Outfit", sans-serif',
+                fontSize: 'clamp(3rem, 8vw, 8rem)',
+                lineHeight: 1.05,
+                fontWeight: 700,
+                letterSpacing: '-0.03em',
+                color: '#F0EBF8',
+                margin: 0,
+                opacity: isInView ? undefined : 0,
+                display: 'block'
+              }}
+            />
         </div>
 
         {/* "an idea?" line */}
         <div style={{ overflow: 'hidden', paddingBottom: '16px' }}>
-          <h2
+          <EditableText
+            path={['contact', 'line2']}
+            as="h2"
             className={`contact-cta-heading ${isInView ? 'animate-text-reveal animation-delay-200' : ''}`}
             style={{
               fontFamily: '"Outfit", sans-serif',
@@ -90,10 +96,9 @@ export default function ContactCTA() {
               color: '#F0EBF8',
               margin: 0,
               opacity: isInView ? undefined : 0,
+              display: 'block'
             }}
-          >
-            an idea?
-          </h2>
+          />
         </div>
 
         <div
@@ -113,7 +118,9 @@ export default function ContactCTA() {
               justifyContent: 'center',
             }}
           >
-            <span
+            <EditableText
+              path={['contact', 'buttonText']}
+              as="span"
               className="contact-cta-btn-text"
               style={{
                 fontFamily: '"Outfit", sans-serif',
@@ -123,9 +130,7 @@ export default function ContactCTA() {
                 letterSpacing: '0.05em',
                 color: '#ffffff',
               }}
-            >
-              TELL US
-            </span>
+            />
           </button>
         </div>
       </div>

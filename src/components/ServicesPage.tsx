@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react';
 import MagneticString from './MagneticString';
+import EditableText from './admin/EditableText';
+import EditableMedia from './admin/EditableMedia';
+import { useSiteData } from '../context/SiteDataContext';
 
 export default function ServicesPage() {
   const [isVisible, setIsVisible] = useState(false);
+  const { data } = useSiteData();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 400);
@@ -83,7 +87,9 @@ export default function ServicesPage() {
       >
         {/* Eyebrow */}
         <div style={{ overflow: 'hidden', paddingBottom: '16px' }}>
-          <p
+          <EditableText
+            path={['services', 'hero', 'eyebrow']}
+            as="p"
             className={isVisible ? 'animate-text-reveal' : ''}
             style={{
               fontFamily: '"Inter", sans-serif',
@@ -95,15 +101,14 @@ export default function ServicesPage() {
               margin: '0 auto 24px auto',
               opacity: isVisible ? undefined : 0,
               animationDelay: isVisible ? '0.1s' : undefined,
+              display: 'block'
             }}
-          >
-            Our services
-          </p>
+          />
         </div>
 
         {/* Headline line 1 */}
-        <div className="hero-word-gap" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'flex-end' }}>
-          {['Going', 'beyond'].map((word, i) => (
+        <EditableText path={['services', 'hero', 'line1']} as="div" className="hero-word-gap" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'flex-end' }}>
+          {data.services.hero.line1.split(' ').map((word: string, i: number) => (
             <span
               key={i}
               className={isVisible ? 'animate-text-reveal' : ''}
@@ -127,11 +132,11 @@ export default function ServicesPage() {
               {word}
             </span>
           ))}
-        </div>
+        </EditableText>
 
         {/* Headline line 2 */}
-        <div className="hero-word-gap" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'flex-end', marginBottom: '48px' }}>
-          {["what's", 'possible'].map((word, i) => (
+        <EditableText path={['services', 'hero', 'line2']} as="div" className="hero-word-gap" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'flex-end', marginBottom: '48px' }}>
+          {data.services.hero.line2.split(' ').map((word: string, i: number) => (
             <span
               key={i}
               className={isVisible ? 'animate-text-reveal' : ''}
@@ -155,7 +160,7 @@ export default function ServicesPage() {
               {word}
             </span>
           ))}
-        </div>
+        </EditableText>
       </div>
 
       {/* Video Section */}
@@ -186,12 +191,9 @@ export default function ServicesPage() {
             boxShadow: '0 20px 80px rgba(123, 92, 229, 0.12), 0 4px 24px rgba(13, 10, 26, 0.06)',
           }}
         >
-          <video
-            src="https://media.w3.org/2010/05/sintel/trailer.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
+          <EditableMedia
+            path={['services', 'hero', 'videoUrl']}
+            type="video"
             style={{
               width: '100%',
               height: '100%',
@@ -232,27 +234,25 @@ export default function ServicesPage() {
         <MagneticString />
         <div style={{ display: 'flex', gap: '100px', marginTop: '20px', marginBottom: '80px' }}>
           <div style={{ width: '250px' }}>
-            <p style={{
+            <EditableText path={['services', 'solutions', '0', 'title']} as="p" style={{
               fontFamily: '"Inter", sans-serif',
               fontSize: '14px',
               fontWeight: 500,
               letterSpacing: '0.05em',
               color: '#0D0A1A',
-              textTransform: 'uppercase'
-            }}>
-              WEBSITES AND PLATFORMS
-            </p>
+              textTransform: 'uppercase',
+              display: 'block'
+            }} />
           </div>
           <div style={{ flex: 1 }}>
-            <p style={{
+            <EditableText path={['services', 'solutions', '0', 'description']} as="p" style={{
               fontFamily: '"Inter", sans-serif',
               fontSize: '28px',
               lineHeight: '1.5',
               fontWeight: 400,
               color: '#0D0A1A',
-            }}>
-              In our team, developers work alongside designers. This is crucial in creating a fast and responsive website that would excite the audience.
-            </p>
+              display: 'block'
+            }} />
           </div>
         </div>
 
@@ -260,27 +260,25 @@ export default function ServicesPage() {
         <MagneticString />
         <div style={{ display: 'flex', gap: '100px', marginTop: '20px', marginBottom: '80px' }}>
           <div style={{ width: '250px' }}>
-            <p style={{
+            <EditableText path={['services', 'solutions', '1', 'title']} as="p" style={{
               fontFamily: '"Inter", sans-serif',
               fontSize: '14px',
               fontWeight: 500,
               letterSpacing: '0.05em',
               color: '#0D0A1A',
-              textTransform: 'uppercase'
-            }}>
-              MOBILE APPLICATIONS
-            </p>
+              textTransform: 'uppercase',
+              display: 'block'
+            }} />
           </div>
           <div style={{ flex: 1 }}>
-            <p style={{
+            <EditableText path={['services', 'solutions', '1', 'description']} as="p" style={{
               fontFamily: '"Inter", sans-serif',
               fontSize: '28px',
               lineHeight: '1.5',
               fontWeight: 400,
               color: '#0D0A1A',
-            }}>
-              Cuberto doesn't do cookie-cutter solutions. Every mobile app involves stages of target audience research and prototype testing. The result? A product that's perfectly suited to your users.
-            </p>
+              display: 'block'
+            }} />
           </div>
         </div>
 
@@ -288,27 +286,25 @@ export default function ServicesPage() {
         <MagneticString />
         <div style={{ display: 'flex', gap: '100px', marginTop: '20px' }}>
           <div style={{ width: '250px' }}>
-            <p style={{
+            <EditableText path={['services', 'solutions', '2', 'title']} as="p" style={{
               fontFamily: '"Inter", sans-serif',
               fontSize: '14px',
               fontWeight: 500,
               letterSpacing: '0.05em',
               color: '#0D0A1A',
-              textTransform: 'uppercase'
-            }}>
-              STRATEGY AND BRANDING
-            </p>
+              textTransform: 'uppercase',
+              display: 'block'
+            }} />
           </div>
           <div style={{ flex: 1 }}>
-            <p style={{
+            <EditableText path={['services', 'solutions', '2', 'description']} as="p" style={{
               fontFamily: '"Inter", sans-serif',
               fontSize: '28px',
               lineHeight: '1.5',
               fontWeight: 400,
               color: '#0D0A1A',
-            }}>
-              We identify your brand by developing a logo, corporate identity, user manuals, any mockups, and souvenir products. Whatever it takes to get your brand noticed.
-            </p>
+              display: 'block'
+            }} />
           </div>
         </div>
       </div>

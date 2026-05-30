@@ -1,4 +1,5 @@
 import { Instagram, Youtube, Github, Facebook, Dribbble } from 'lucide-react';
+import EditableText from './admin/EditableText';
 
 export default function Footer() {
   return (
@@ -45,13 +46,11 @@ export default function Footer() {
                 onMouseEnter={(e) => e.currentTarget.style.borderColor = '#7B5CE5'}
                 onMouseLeave={(e) => e.currentTarget.style.borderColor = '#2A1F42'}
               >
-                info@gloom.com
+                <EditableText path={['footer', 'office1', 'email']} as="span" />
               </button>
-              <span style={{ fontSize: '11px', color: '#5A4E7A', letterSpacing: '0.08em', marginBottom: '12px', textTransform: 'uppercase' }}>
-                Main Office
-              </span>
-              <span style={{ fontSize: '15px', color: '#9B8EC4', marginBottom: '4px' }}>901 N Pitt Street</span>
-              <span style={{ fontSize: '15px', color: '#9B8EC4' }}>Alexandria VA, 22314</span>
+              <EditableText path={['footer', 'office1', 'title']} as="span" style={{ fontSize: '11px', color: '#5A4E7A', letterSpacing: '0.08em', marginBottom: '12px', textTransform: 'uppercase' }} />
+              <EditableText path={['footer', 'office1', 'line1']} as="span" style={{ fontSize: '15px', color: '#9B8EC4', marginBottom: '4px' }} />
+              <EditableText path={['footer', 'office1', 'line2']} as="span" style={{ fontSize: '15px', color: '#9B8EC4' }} />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
@@ -71,13 +70,11 @@ export default function Footer() {
                 onMouseEnter={(e) => e.currentTarget.style.borderColor = '#7B5CE5'}
                 onMouseLeave={(e) => e.currentTarget.style.borderColor = '#2A1F42'}
               >
-                +1 301 549 9309
+                <EditableText path={['footer', 'office2', 'phone']} as="span" />
               </button>
-              <span style={{ fontSize: '11px', color: '#5A4E7A', letterSpacing: '0.08em', marginBottom: '12px', textTransform: 'uppercase' }}>
-                Second Office
-              </span>
-              <span style={{ fontSize: '15px', color: '#9B8EC4', marginBottom: '4px' }}>Na Perstyne</span>
-              <span style={{ fontSize: '15px', color: '#9B8EC4' }}>342/1, 11000 Prague</span>
+              <EditableText path={['footer', 'office2', 'title']} as="span" style={{ fontSize: '11px', color: '#5A4E7A', letterSpacing: '0.08em', marginBottom: '12px', textTransform: 'uppercase' }} />
+              <EditableText path={['footer', 'office2', 'line1']} as="span" style={{ fontSize: '15px', color: '#9B8EC4', marginBottom: '4px' }} />
+              <EditableText path={['footer', 'office2', 'line2']} as="span" style={{ fontSize: '15px', color: '#9B8EC4' }} />
             </div>
           </div>
 

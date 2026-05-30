@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import { projects } from './FeaturedProjects';
+import { useSiteData } from '../context/SiteDataContext';
 import ImageSlideshow from './ImageSlideshow';
 
 export default function ProjectsPage() {
+  const { data } = useSiteData();
+  const projects = data.projects;
   const [isVisible, setIsVisible] = useState(false);
   const [activeFilter, setActiveFilter] = useState('All Projects');
 

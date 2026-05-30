@@ -1,94 +1,12 @@
 import ImageSlideshow from './ImageSlideshow';
-
-export const projects = [
-  {
-    id: 1,
-    title: 'Punto Pago',
-    description: 'The First Super-App in Latin America',
-    images: [
-      'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=482&h=651&fit=crop',
-      'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?q=80&w=482&h=651&fit=crop',
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=482&h=651&fit=crop'
-    ],
-    detailHeadline: 'A digital product for Latin America',
-    detailVideo: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
-    detailImages: [
-      'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?q=80&w=1296&h=729&fit=crop',
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1296&h=729&fit=crop'
-    ],
-    overviewText: 'Punto Pago is designed to be the ultimate super-app for the Latin American market, integrating financial services, e-commerce, and lifestyle features into a single, seamless platform. This ambitious project aims to bank the unbanked, simplify daily transactions, and foster a connected digital economy across the region.'
-  },
-  {
-    id: 2,
-    title: 'Smart Watch UI',
-    description: 'Wearable Design',
-    images: [
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=482&h=651&fit=crop',
-      'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?q=80&w=482&h=651&fit=crop',
-      'https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?q=80&w=482&h=651&fit=crop'
-    ],
-    detailHeadline: 'Intuitive design for wearable technology',
-    detailVideo: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
-    detailImages: [
-      'https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?q=80&w=1296&h=729&fit=crop',
-      'https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?q=80&w=1296&h=729&fit=crop'
-    ],
-    overviewText: 'Creating interfaces for smartwatches requires extreme economy of space and movement. Our Smart Watch UI focuses on high-contrast typography, glanceable information, and large, forgiving touch targets. The result is an operating environment that feels fast, intuitive, and natural on the wrist.'
-  },
-  {
-    id: 3,
-    title: 'Nike Air',
-    description: 'E-commerce Platform',
-    images: [
-      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=482&h=651&fit=crop',
-      'https://images.unsplash.com/photo-1605340537584-f6dfcce10c11?q=80&w=482&h=651&fit=crop',
-      'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=482&h=651&fit=crop'
-    ],
-    detailHeadline: 'High-performance e-commerce experience',
-    detailVideo: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
-    detailImages: [
-      'https://images.unsplash.com/photo-1605340537584-f6dfcce10c11?q=80&w=1296&h=729&fit=crop',
-      'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=1296&h=729&fit=crop'
-    ],
-    overviewText: 'The Nike Air conceptual e-commerce platform pushes the boundaries of online retail. Featuring real-time 3D models, aggressive typography, and brutalist layout elements, it creates a shopping experience that feels as dynamic and high-performance as the products themselves.'
-  },
-  {
-    id: 4,
-    title: 'Wooden Stool',
-    description: 'Furniture Brand Identity',
-    images: [
-      'https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=482&h=651&fit=crop',
-      'https://images.unsplash.com/photo-1506898667547-42e22a46e125?q=80&w=482&h=651&fit=crop',
-      'https://images.unsplash.com/photo-1592078615290-033ee584e267?q=80&w=482&h=651&fit=crop'
-    ],
-    detailHeadline: 'Minimalist identity for modern furniture',
-    detailVideo: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
-    detailImages: [
-      'https://images.unsplash.com/photo-1506898667547-42e22a46e125?q=80&w=1296&h=729&fit=crop',
-      'https://images.unsplash.com/photo-1592078615290-033ee584e267?q=80&w=1296&h=729&fit=crop'
-    ],
-    overviewText: 'Wooden Stool is a boutique furniture brand that values craftsmanship and sustainability. We developed a brand identity that reflects these core values through a muted, earthy color palette, elegant serif typography, and generous use of negative space across all digital touchpoints.'
-  },
-  {
-    id: 5,
-    title: 'Polaroid Capture',
-    description: 'Photography App',
-    images: [
-      'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=482&h=651&fit=crop',
-      'https://images.unsplash.com/photo-1520390138845-fd2d229dd553?q=80&w=482&h=651&fit=crop',
-      'https://images.unsplash.com/photo-1534068305881-dfb34e4deec4?q=80&w=482&h=651&fit=crop'
-    ],
-    detailHeadline: 'Analog nostalgia in a digital world',
-    detailVideo: 'https://media.w3.org/2010/05/sintel/trailer.mp4',
-    detailImages: [
-      'https://images.unsplash.com/photo-1520390138845-fd2d229dd553?q=80&w=1296&h=729&fit=crop',
-      'https://images.unsplash.com/photo-1534068305881-dfb34e4deec4?q=80&w=1296&h=729&fit=crop'
-    ],
-    overviewText: 'Polaroid Capture brings the unpredictable joy of instant film photography to modern smartphones. The interface mimics the tactile feel of a physical camera, with satisfying haptic feedback, mechanical sound design, and a unique developing process that forces users to wait for their memories.'
-  },
-];
+import EditableText from './admin/EditableText';
+import EditableMedia from './admin/EditableMedia';
+import EditableImageArray from './admin/EditableImageArray';
+import { useSiteData } from '../context/SiteDataContext';
 
 export default function FeaturedProjects() {
+  const { data } = useSiteData();
+  const projects = data.projects;
   return (
     <section
       className="featured-section"
@@ -175,7 +93,9 @@ export default function FeaturedProjects() {
                     marginBottom: '20px',
                   }}
                 >
-                  <ImageSlideshow images={project.images} />
+                  <EditableImageArray path={['projects', projects.findIndex(p => p.id === project.id).toString(), 'images']} images={project.images}>
+                    <ImageSlideshow images={project.images} />
+                  </EditableImageArray>
                 </div>
                 <h3
                   style={{
@@ -186,7 +106,7 @@ export default function FeaturedProjects() {
                     margin: '0 0 8px 0',
                   }}
                 >
-                  <strong>{project.title}</strong> <span style={{ color: '#9B8EC4' }}>– {project.description}</span>
+                  <strong><EditableText path={['projects', projects.findIndex(p => p.id === project.id).toString(), 'title']} /></strong> <span style={{ color: '#9B8EC4' }}>– <EditableText path={['projects', projects.findIndex(p => p.id === project.id).toString(), 'description']} /></span>
                 </h3>
               </div>
             ))}
@@ -221,7 +141,9 @@ export default function FeaturedProjects() {
                     marginBottom: '20px',
                   }}
                 >
-                  <ImageSlideshow images={project.images} />
+                  <EditableImageArray path={['projects', projects.findIndex(p => p.id === project.id).toString(), 'images']} images={project.images}>
+                    <ImageSlideshow images={project.images} />
+                  </EditableImageArray>
                 </div>
                 <h3
                   style={{
@@ -232,7 +154,7 @@ export default function FeaturedProjects() {
                     margin: '0 0 8px 0',
                   }}
                 >
-                  <strong>{project.title}</strong> <span style={{ color: '#9B8EC4' }}>– {project.description}</span>
+                  <strong><EditableText path={['projects', projects.findIndex(p => p.id === project.id).toString(), 'title']} /></strong> <span style={{ color: '#9B8EC4' }}>– <EditableText path={['projects', projects.findIndex(p => p.id === project.id).toString(), 'description']} /></span>
                 </h3>
               </div>
             ))}

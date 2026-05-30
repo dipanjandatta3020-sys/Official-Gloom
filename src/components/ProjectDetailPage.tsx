@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { projects } from './FeaturedProjects';
+import { useSiteData } from '../context/SiteDataContext';
+import EditableText from './admin/EditableText';
+import EditableMedia from './admin/EditableMedia';
 import MagneticString from './MagneticString';
 
 interface ProjectDetailPageProps {
@@ -8,9 +10,13 @@ interface ProjectDetailPageProps {
 
 export default function ProjectDetailPage({ id }: ProjectDetailPageProps) {
   const [isVisible, setIsVisible] = useState(false);
+  const { data } = useSiteData();
+  const projects = data.projects;
 
   // Find the project data
-  const project = projects.find(p => p.id === id) || projects[0];
+  const projectIndex = projects.findIndex((p: any) => p.id === id);
+  const pIndexStr = (projectIndex === -1 ? 0 : projectIndex).toString();
+  const project = projects[projectIndex] || projects[0];
 
   useEffect(() => {
     // Reset visibility when ID changes
@@ -77,7 +83,9 @@ export default function ProjectDetailPage({ id }: ProjectDetailPageProps) {
         }}
       >
         <div style={{ overflow: 'hidden', paddingBottom: '16px' }}>
-          <p
+          <EditableText
+            path={['projects', pIndexStr, 'title']}
+            as="p"
             className={isVisible ? 'animate-text-reveal' : ''}
             style={{
               fontFamily: '"Inter", sans-serif',
@@ -88,15 +96,14 @@ export default function ProjectDetailPage({ id }: ProjectDetailPageProps) {
               margin: '0 auto 40px auto',
               opacity: isVisible ? undefined : 0,
               animationDelay: isVisible ? '0.1s' : undefined,
+              display: 'block'
             }}
-          >
-            {project.title}
-          </p>
+          />
         </div>
 
         {/* Staggered Word Reveal for Headline */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px' }}>
-          {project.detailHeadline.split(' ').map((word, i) => (
+        <EditableText path={['projects', pIndexStr, 'detailHeadline']} as="div" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px' }}>
+          {project.detailHeadline.split(' ').map((word: string, i: number) => (
             <div key={i} style={{ overflow: 'hidden', paddingBottom: '16px' }}>
               <span
                 className={isVisible ? 'animate-text-reveal' : ''}
@@ -116,7 +123,7 @@ export default function ProjectDetailPage({ id }: ProjectDetailPageProps) {
               </span>
             </div>
           ))}
-        </div>
+        </EditableText>
       </div>
 
       {/* Video Section */}
@@ -144,12 +151,9 @@ export default function ProjectDetailPage({ id }: ProjectDetailPageProps) {
             backgroundColor: '#EDE9F8',
           }}
         >
-          <video
-            src={project.detailVideo}
-            autoPlay
-            muted
-            loop
-            playsInline
+          <EditableMedia
+            path={['projects', pIndexStr, 'detailVideo']}
+            type="video"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
         </div>
@@ -183,7 +187,7 @@ export default function ProjectDetailPage({ id }: ProjectDetailPageProps) {
               animationDelay: isVisible ? `${0.8 + i * 0.2}s` : undefined,
             }}
           >
-            <img src={img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            <EditableMedia path={['projects', pIndexStr, 'detailImages', i.toString()]} type="image" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           </div>
         ))}
       </div>
@@ -229,15 +233,19 @@ export default function ProjectDetailPage({ id }: ProjectDetailPageProps) {
             </p>
           </div>
           <div style={{ flex: 1 }}>
-            <p style={{
-              fontFamily: '"Inter", sans-serif',
-              fontSize: '28px',
-              lineHeight: '1.5',
-              fontWeight: 400,
-              color: '#0D0A1A',
-            }}>
-              {project.overviewText}
-            </p>
+            <EditableText
+              path={['projects', pIndexStr, 'overviewText']}
+              as="p"
+              style={{
+                fontFamily: '"Inter", sans-serif',
+                fontSize: '28px',
+                lineHeight: '1.5',
+                fontWeight: 400,
+                color: '#0D0A1A',
+                margin: 0,
+                display: 'block'
+              }}
+            />
           </div>
         </div>
       </div>
