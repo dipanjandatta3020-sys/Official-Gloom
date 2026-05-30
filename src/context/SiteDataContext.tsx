@@ -44,12 +44,9 @@ export const SiteDataProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setIsAuthenticated(!!user);
-      if (!user && isAdmin) {
-        setIsAdmin(false);
-      }
     });
     return () => unsubscribe();
-  }, [isAdmin]);
+  }, []);
 
   // Load from Firestore on mount
   useEffect(() => {
