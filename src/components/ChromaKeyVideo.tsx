@@ -14,7 +14,15 @@ export default function ChromaKeyVideo({ src, style, className }: ChromaKeyVideo
   const processFrame = useCallback(() => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
+    
+    // If we don't have video/canvas or video is paused/ended, just loop and wait
     if (!video || !canvas || video.paused || video.ended) {
+      rafRef.current = requestAnimationFrame(processFrame);
+      return;
+    }
+
+    // Wait until video has actual dimensions
+    if (video.videoWidth === 0 || video.videoHeight === 0) {
       rafRef.current = requestAnimationFrame(processFrame);
       return;
     }
@@ -52,21 +60,30 @@ export default function ChromaKeyVideo({ src, style, className }: ChromaKeyVideo
     if (!video) return;
 
     const handlePlay = () => {
+      cancelAnimationFrame(rafRef.current);
       rafRef.current = requestAnimationFrame(processFrame);
     };
 
     video.addEventListener('play', handlePlay);
+    video.addEventListener('playing', handlePlay);
+    
     // Try to autoplay
     video.play().catch(() => {});
 
+    // If it's already playing somehow, start the loop
+    if (!video.paused) {
+      handlePlay();
+    }
+
     return () => {
       video.removeEventListener('play', handlePlay);
+      video.removeEventListener('playing', handlePlay);
       cancelAnimationFrame(rafRef.current);
     };
   }, [src, processFrame]);
 
   return (
-    <div style={{ position: 'relative', ...style }} className={className}>
+    <div style={{ position: 'relative', overflow: 'hidden', ...style }} className={className}>
       <video
         ref={videoRef}
         src={src}
@@ -74,8 +91,16 @@ export default function ChromaKeyVideo({ src, style, className }: ChromaKeyVideo
         muted
         loop
         playsInline
+        preload="auto"
         crossOrigin="anonymous"
-        style={{ display: 'none' }}
+        style={{ 
+          position: 'absolute', 
+          opacity: 0, 
+          pointerEvents: 'none', 
+          width: '10px', 
+          height: '10px',
+          zIndex: -1
+        }}
       />
       <canvas
         ref={canvasRef}
