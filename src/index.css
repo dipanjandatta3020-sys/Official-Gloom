@@ -383,3 +383,72 @@ body.admin-mode .featured-card-img {
   opacity: 1 !important;
   transform: none !important;
 }
+
+/* --- Global Mobile Overrides for new pages --- */
+@media (max-width: 768px) {
+  .services-page-section, .projects-page-section, .project-detail-section {
+    padding-top: 120px !important;
+    padding-bottom: 60px !important;
+  }
+  
+  .services-page-section .hero-word-gap,
+  .projects-page-section h1 {
+    gap: 8px !important;
+  }
+
+  .projects-page-section > div:nth-of-type(4) {
+    margin-top: 40px !important;
+  }
+  
+  /* Projects grid */
+  .projects-page-section > div:last-of-type > div,
+  .projects-page-section > div:nth-child(5) > div {
+    flex-direction: column !important;
+    gap: 40px !important;
+    padding: 0 !important;
+    margin-top: 40px !important;
+  }
+
+  .projects-page-section > div:last-of-type > div > div {
+    width: 100% !important;
+    margin-top: 0 !important;
+    gap: 40px !important;
+  }
+
+  .services-page-section .hero-video-wrapper,
+  .projects-page-section .hero-video-wrapper {
+    margin-top: 40px !important;
+    padding: 0 16px !important;
+  }
+
+  /* Services page solutions grid */
+  .services-page-section > div:last-of-type > div[style*="display: flex"] {
+    flex-direction: column !important;
+    gap: 16px !important;
+    margin-bottom: 40px !important;
+  }
+  .services-page-section > div:last-of-type > div > div:first-child {
+    width: 100% !important;
+  }
+  .services-page-section > div:last-of-type {
+    margin-top: 60px !important;
+    margin-bottom: 60px !important;
+  }
+  
+  /* Project Detail page */
+  .project-detail-section > div[style*="max-width: 1526px"] {
+    padding: 0 16px !important;
+    margin-top: 40px !important;
+  }
+  .project-detail-section > div[style*="max-width: 1296px"] {
+    margin-top: 60px !important;
+    margin-bottom: 60px !important;
+  }
+  .project-detail-section > div[style*="max-width: 1296px"] > div[style*="display: flex"] {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  .project-detail-section > div[style*="max-width: 1296px"] > div > div:first-child {
+    width: 100% !important;
+  }
+}

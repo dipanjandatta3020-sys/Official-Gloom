@@ -59,15 +59,14 @@ export default function Services({ openServices }: { openServices: () => void })
             width: '480px',
             height: '480px',
             overflow: 'hidden',
-            backgroundColor: '#EDE9F8',
-            border: '1px solid rgba(123, 92, 229, 0.15)',
+            backgroundColor: 'transparent',
             borderRadius: '40px',
-            boxShadow: '0 0 60px rgba(123, 92, 229, 0.08)',
           }}
         >
           <EditableMedia
             path={['homeServices', 'videoUrl']}
             type="video"
+            chromakey={true}
             style={{
               width: '100%',
               height: '100%',

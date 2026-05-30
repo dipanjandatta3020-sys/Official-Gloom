@@ -8,6 +8,7 @@ interface SiteDataContextType {
   data: SiteData;
   isAdmin: boolean;
   isAuthenticated: boolean;
+  isLoading: boolean;
   setIsAdmin: (val: boolean) => void;
   updateData: (path: string[], value: any) => void;
   saveData: () => void;
@@ -38,6 +39,7 @@ function updateNestedProperty(obj: any, path: string[], value: any): any {
 export const SiteDataProvider = ({ children }: { children: ReactNode }) => {
   const [data, setData] = useState<SiteData>(initialSiteData);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -59,6 +61,8 @@ export const SiteDataProvider = ({ children }: { children: ReactNode }) => {
         }
       } catch (e) {
         console.error('Failed to load site data from Firestore', e);
+      } finally {
+        setIsLoading(false);
       }
     };
     loadData();
@@ -99,8 +103,30 @@ export const SiteDataProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div style={{
+        minHeight: '100vh',
+        backgroundColor: '#ffffff',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        <div style={{
+          width: '40px',
+          height: '40px',
+          border: '3px solid rgba(123, 92, 229, 0.15)',
+          borderTopColor: '#7B5CE5',
+          borderRadius: '50%',
+          animation: 'spin 0.8s linear infinite',
+        }} />
+        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      </div>
+    );
+  }
+
   return (
-    <SiteDataContext.Provider value={{ data, isAdmin, isAuthenticated, setIsAdmin, updateData, saveData }}>
+    <SiteDataContext.Provider value={{ data, isAdmin, isAuthenticated, isLoading, setIsAdmin, updateData, saveData }}>
       {children}
     </SiteDataContext.Provider>
   );

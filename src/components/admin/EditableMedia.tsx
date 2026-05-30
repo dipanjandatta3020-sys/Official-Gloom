@@ -1,14 +1,16 @@
 import React, { useRef, useEffect } from 'react';
 import { useSiteData } from '../../context/SiteDataContext';
+import ChromaKeyVideo from '../ChromaKeyVideo';
 
 interface EditableMediaProps {
   path: string[];
   type: 'image' | 'video';
   className?: string;
   style?: React.CSSProperties;
+  chromakey?: boolean;
 }
 
-export default function EditableMedia({ path, type, className, style }: EditableMediaProps) {
+export default function EditableMedia({ path, type, className, style, chromakey }: EditableMediaProps) {
   const { data, isAdmin, updateData } = useSiteData();
   
   // Resolve value from path
@@ -33,6 +35,15 @@ export default function EditableMedia({ path, type, className, style }: Editable
     }, [url, type]);
 
     if (type === 'video') {
+      if (chromakey) {
+        return (
+          <ChromaKeyVideo
+            src={url}
+            className={className}
+            style={style}
+          />
+        );
+      }
       return (
         <video
           ref={videoRef}
