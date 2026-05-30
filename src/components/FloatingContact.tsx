@@ -16,58 +16,53 @@ export default function FloatingContact() {
         className="floating-contact-circle"
         style={{
           position: 'relative',
-          width: '140px',
-          height: '140px',
+          width: '110px',
+          height: '110px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           cursor: 'pointer',
           transition: 'transform 0.3s ease',
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+        onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
         onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
       >
-        {/* Spinning text */}
-        <div
+        {/* Spinning text ring — tight, correct radius */}
+        <svg
+          viewBox="0 0 110 110"
           style={{
             position: 'absolute',
             inset: 0,
-            borderRadius: '50%',
-            animation: 'spin 10s linear infinite',
-            mixBlendMode: 'difference',
-            color: '#ffffff',
+            width: '100%',
+            height: '100%',
+            animation: 'spinText 12s linear infinite',
           }}
         >
-          <svg viewBox="0 0 100 100" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
+          <defs>
             <path
-              id="circlePath"
-              d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
-              fill="transparent"
+              id="textCircle"
+              d="M 55,55 m -42,0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0"
             />
-            <text
-              fill="#ffffff"
-              fontSize="10"
-              letterSpacing="4.5"
-              style={{
-                fontFamily: 'monospace',
-                textTransform: 'uppercase',
-                fontWeight: 700,
-                opacity: 1,
-              }}
-            >
-              <textPath href="#circlePath" startOffset="0%">
-                contact • contact • contact • contact •{' '}
-              </textPath>
-            </text>
-          </svg>
-        </div>
+          </defs>
+          <text
+            fontSize="8.5"
+            letterSpacing="3.2"
+            fill="#7B5CE5"
+            fontFamily="'Inter', monospace"
+            fontWeight="600"
+          >
+            <textPath href="#textCircle" startOffset="0%">
+              CONTACT • CONTACT • CONTACT •
+            </textPath>
+          </text>
+        </svg>
 
-        {/* Inner avatar */}
+        {/* Logo only — no circle bg */}
         <div
           className="floating-contact-logo"
           style={{
-            width: '120px',
-            height: '120px',
+            width: '72px',
+            height: '72px',
             zIndex: 10,
             display: 'flex',
             alignItems: 'center',
@@ -76,14 +71,14 @@ export default function FloatingContact() {
         >
           <img
             src="/logo.png"
-            alt="Gloom Logo"
+            alt="Contact"
             style={{ width: '100%', height: '100%', objectFit: 'contain' }}
           />
         </div>
       </div>
 
       <style>{`
-        @keyframes spin {
+        @keyframes spinText {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
         }

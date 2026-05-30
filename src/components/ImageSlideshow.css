@@ -1,0 +1,59 @@
+.img-slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #0A0617;
+}
+
+.img-slideshow-img {
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1);
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+/* For 3 images (4.5s cycle) */
+/* 
+   Hold: 1.1s, Fade: 0.4s -> Total 1.5s per slide.
+   0.4s / 4.5s = 8.8% fade time
+   1.5s / 4.5s = 33.3% per image slice
+*/
+.count-3 {
+  animation-name: slideshow3;
+}
+@keyframes slideshow3 {
+  0%    { opacity: 0; transform: scale(1.0); }
+  8.8%  { opacity: 1; transform: scale(1.01); }
+  33.3% { opacity: 1; transform: scale(1.03); }
+  42.1% { opacity: 0; transform: scale(1.04); }
+  100%  { opacity: 0; transform: scale(1.04); }
+}
+
+/* For 2 images (3.0s cycle) */
+/* 
+   Hold: 1.1s, Fade: 0.4s -> Total 1.5s per slide.
+   0.4s / 3.0s = 13.3% fade time
+   1.5s / 3.0s = 50% per image slice
+*/
+.count-2 {
+  animation-name: slideshow2;
+}
+@keyframes slideshow2 {
+  0%    { opacity: 0; transform: scale(1.0); }
+  13.3% { opacity: 1; transform: scale(1.01); }
+  50%   { opacity: 1; transform: scale(1.03); }
+  63.3% { opacity: 0; transform: scale(1.04); }
+  100%  { opacity: 0; transform: scale(1.04); }
+}
+
+/* Ken Burns variations (pan/zoom origins) */
+.kb-0 { transform-origin: 20% 30%; }
+.kb-1 { transform-origin: 80% 80%; }
+.kb-2 { transform-origin: 50% 50%; }

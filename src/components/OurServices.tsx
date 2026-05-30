@@ -1,28 +1,39 @@
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView } from 'motion/react';
 import { useRef } from 'react';
+
+import ImageSlideshow from './ImageSlideshow';
 
 const servicesData = [
   {
     id: 1,
     title: 'Brand Identity',
     description: 'Strategic design that positions AI products for trust and clarity.',
-    image: 'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&w=480&h=648&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?q=80&w=480&h=648&fit=crop',
+      'https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=480&h=648&fit=crop'
+    ],
   },
   {
     id: 2,
     title: 'AI-enhanced UX/UI design',
     description: 'Interfaces that adapt, predict, and respond intelligently.',
-    image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=480&h=648&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=480&h=648&fit=crop',
+      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=480&h=648&fit=crop'
+    ],
   },
   {
     id: 3,
     title: 'Custom development',
     description: 'Frontend + backend + AI integrations — built for performance and scalability.',
-    image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=480&h=648&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=480&h=648&fit=crop',
+      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=480&h=648&fit=crop'
+    ],
   },
 ];
 
-export default function OurServices() {
+export default function OurServices({ openServices }: { openServices: () => void }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-10%' });
 
@@ -33,16 +44,82 @@ export default function OurServices() {
       style={{
         padding: '120px 0 200px 0',
         backgroundColor: '#ffffff',
-        color: '#050505',
         borderRadius: '80px 80px 0 0',
         marginTop: '-80px',
         position: 'relative',
         zIndex: 2,
+        overflow: 'hidden',
       }}
     >
+      {/* === OUR SERVICES BACKGROUND BLOBS === */}
+      {/* Blob 1 — pink, top-left */}
+      <div style={{
+        position: 'absolute', top: '-80px', left: '-80px',
+        width: '500px', height: '500px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(210, 60, 170, 0.35) 0%, rgba(210, 60, 170, 0.10) 50%, transparent 70%)',
+        pointerEvents: 'none', zIndex: 0, filter: 'blur(50px)',
+        animation: 'blobFloat4 16s ease-in-out infinite',
+      }} />
+
+      {/* Blob 2 — violet, top-right */}
+      <div style={{
+        position: 'absolute', top: '10%', right: '-100px',
+        width: '650px', height: '650px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(130, 80, 220, 0.45) 0%, rgba(130, 80, 220, 0.15) 45%, transparent 70%)',
+        pointerEvents: 'none', zIndex: 0, filter: 'blur(45px)',
+        animation: 'blobFloat1 18s ease-in-out infinite',
+      }} />
+
+      {/* Blob 3 — lavender, center-left */}
+      <div style={{
+        position: 'absolute', top: '35%', left: '-150px',
+        width: '700px', height: '700px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(160, 120, 240, 0.30) 0%, transparent 65%)',
+        pointerEvents: 'none', zIndex: 0, filter: 'blur(70px)',
+        animation: 'blobFloat3 14s ease-in-out infinite',
+      }} />
+
+      {/* Blob 4 — warm pink, center-right */}
+      <div style={{
+        position: 'absolute', top: '55%', right: '-50px',
+        width: '450px', height: '450px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(190, 80, 190, 0.35) 0%, transparent 65%)',
+        pointerEvents: 'none', zIndex: 0, filter: 'blur(60px)',
+        animation: 'blobFloat2 15s ease-in-out infinite',
+      }} />
+
+      {/* Blob 5 — soft violet, bottom-left */}
+      <div style={{
+        position: 'absolute', bottom: '10%', left: '5%',
+        width: '550px', height: '550px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(130, 80, 220, 0.35) 0%, rgba(130, 80, 220, 0.10) 50%, transparent 70%)',
+        pointerEvents: 'none', zIndex: 0, filter: 'blur(55px)',
+        animation: 'blobFloat1 19s ease-in-out infinite',
+      }} />
+
+      {/* Blob 6 — magenta, bottom-right */}
+      <div style={{
+        position: 'absolute', bottom: '-50px', right: '10%',
+        width: '400px', height: '400px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(210, 60, 170, 0.40) 0%, rgba(210, 60, 170, 0.15) 50%, transparent 70%)',
+        pointerEvents: 'none', zIndex: 0, filter: 'blur(45px)',
+        animation: 'blobFloat4 12s ease-in-out infinite',
+      }} />
+
+      {/* Blob 7 — massive faint lavender wash, dead center */}
+      <div style={{
+        position: 'absolute', top: '50%', left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '1200px', height: '1200px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(160, 120, 240, 0.15) 0%, transparent 60%)',
+        pointerEvents: 'none', zIndex: 0, filter: 'blur(90px)',
+        animation: 'blobPulse 20s ease-in-out infinite',
+      }} />
       <div
         className="ourservices-container"
         style={{
+          position: 'relative',
+          zIndex: 10,
           maxWidth: '1528px',
           margin: '0 auto',
           padding: '0 230px',
@@ -50,9 +127,11 @@ export default function OurServices() {
       >
         <h2
           style={{
+            fontFamily: '"Outfit", sans-serif',
             fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
             fontWeight: 700,
-            letterSpacing: '-0.02em',
+            letterSpacing: '-0.03em',
+            color: '#0D0A1A',
             marginBottom: '40px',
             lineHeight: 1.1,
           }}
@@ -63,10 +142,11 @@ export default function OurServices() {
         <p
           className="ourservices-desc"
           style={{
-            fontSize: '24px',
+            fontFamily: '"Inter", sans-serif',
+            fontSize: '22px',
             lineHeight: 1.4,
             fontWeight: 400,
-            color: '#050505',
+            color: '#6B5F8A',
             maxWidth: '500px',
             marginBottom: '80px',
           }}
@@ -108,28 +188,19 @@ export default function OurServices() {
                     height: '648px',
                     borderRadius: '40px',
                     overflow: 'hidden',
-                    backgroundColor: '#f5f5f5',
+                    border: '1px solid rgba(123, 92, 229, 0.15)',
+                    backgroundColor: '#ffffff',
                     marginBottom: '20px',
                   }}
                 >
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      transition: 'transform 0.5s ease',
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                  />
+                  <ImageSlideshow images={service.images} />
                 </div>
                 <h3
                   style={{
-                    fontSize: '24px',
-                    fontWeight: 500,
-                    color: '#050505',
+                    fontFamily: '"Inter", sans-serif',
+                    fontSize: '22px',
+                    fontWeight: 600,
+                    color: '#0D0A1A',
                     margin: '0 0 8px 0',
                   }}
                 >
@@ -137,9 +208,11 @@ export default function OurServices() {
                 </h3>
                 <p
                   style={{
-                    fontSize: '16px',
-                    color: '#666666',
+                    fontFamily: '"Inter", sans-serif',
+                    fontSize: '15px',
+                    color: '#6B5F8A',
                     margin: 0,
+                    lineHeight: 1.65,
                   }}
                 >
                   {service.description}
@@ -174,28 +247,19 @@ export default function OurServices() {
                     height: '648px',
                     borderRadius: '40px',
                     overflow: 'hidden',
-                    backgroundColor: '#f5f5f5',
+                    border: '1px solid rgba(123, 92, 229, 0.15)',
+                    backgroundColor: '#ffffff',
                     marginBottom: '20px',
                   }}
                 >
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      transition: 'transform 0.5s ease',
-                    }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-                  />
+                  <ImageSlideshow images={service.images} />
                 </div>
                 <h3
                   style={{
-                    fontSize: '24px',
-                    fontWeight: 500,
-                    color: '#050505',
+                    fontFamily: '"Inter", sans-serif',
+                    fontSize: '22px',
+                    fontWeight: 600,
+                    color: '#0D0A1A',
                     margin: '0 0 8px 0',
                   }}
                 >
@@ -203,9 +267,11 @@ export default function OurServices() {
                 </h3>
                 <p
                   style={{
-                    fontSize: '16px',
-                    color: '#666666',
+                    fontFamily: '"Inter", sans-serif',
+                    fontSize: '15px',
+                    color: '#6B5F8A',
                     margin: 0,
+                    lineHeight: 1.65,
                   }}
                 >
                   {service.description}
@@ -223,17 +289,19 @@ export default function OurServices() {
           }}
         >
           <button
-            className="cta-btn cta-btn-dark"
+            className="cta-btn cta-btn-on-light"
+            onClick={openServices}
             style={{
               width: '285px',
               height: '85px',
               borderRadius: '100px',
               fontWeight: 500,
               fontSize: '18px',
-              fontFamily: 'inherit',
+              fontFamily: '"Inter", sans-serif',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              cursor: 'pointer',
             }}
           >
             View all services

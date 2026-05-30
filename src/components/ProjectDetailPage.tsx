@@ -1,0 +1,246 @@
+import { useEffect, useState } from 'react';
+import { projects } from './FeaturedProjects';
+import MagneticString from './MagneticString';
+
+interface ProjectDetailPageProps {
+  id: number;
+}
+
+export default function ProjectDetailPage({ id }: ProjectDetailPageProps) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  // Find the project data
+  const project = projects.find(p => p.id === id) || projects[0];
+
+  useEffect(() => {
+    // Reset visibility when ID changes
+    setIsVisible(false);
+    const timer = setTimeout(() => setIsVisible(true), 100);
+    return () => clearTimeout(timer);
+  }, [id]);
+
+  return (
+    <section
+      className="project-detail-section"
+      style={{
+        position: 'relative',
+        paddingTop: '200px',
+        paddingBottom: '100px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '100%',
+        minHeight: '100vh',
+        margin: '0 auto',
+        backgroundColor: '#ffffff',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Background Blobs (same as Hero/Services/Projects) */}
+      <div style={{
+        position: 'absolute', top: '-80px', left: '-120px',
+        width: '650px', height: '650px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(130, 80, 220, 0.65) 0%, rgba(130, 80, 220, 0.25) 45%, transparent 70%)',
+        pointerEvents: 'none', zIndex: 0, filter: 'blur(40px)',
+        animation: 'blobFloat1 12s ease-in-out infinite',
+      }} />
+
+      <div style={{
+        position: 'absolute', top: '-40px', right: '-80px',
+        width: '420px', height: '420px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(210, 60, 170, 0.55) 0%, rgba(210, 60, 170, 0.18) 50%, transparent 70%)',
+        pointerEvents: 'none', zIndex: 0, filter: 'blur(50px)',
+        animation: 'blobFloat2 15s ease-in-out infinite',
+      }} />
+
+      <div style={{
+        position: 'absolute', top: '200px', right: '-60px',
+        width: '340px', height: '340px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(160, 120, 240, 0.40) 0%, rgba(160, 120, 240, 0.12) 50%, transparent 70%)',
+        pointerEvents: 'none', zIndex: 0, filter: 'blur(60px)',
+        animation: 'blobFloat3 10s ease-in-out infinite',
+      }} />
+
+      {/* Header Text Block */}
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          textAlign: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          width: '100%',
+          maxWidth: '1200px',
+          padding: '0 20px',
+        }}
+      >
+        <div style={{ overflow: 'hidden', paddingBottom: '16px' }}>
+          <p
+            className={isVisible ? 'animate-text-reveal' : ''}
+            style={{
+              fontFamily: '"Inter", sans-serif',
+              fontSize: '18px',
+              lineHeight: 1.65,
+              color: '#0D0A1A',
+              fontWeight: 500,
+              margin: '0 auto 40px auto',
+              opacity: isVisible ? undefined : 0,
+              animationDelay: isVisible ? '0.1s' : undefined,
+            }}
+          >
+            {project.title}
+          </p>
+        </div>
+
+        {/* Staggered Word Reveal for Headline */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px' }}>
+          {project.detailHeadline.split(' ').map((word, i) => (
+            <div key={i} style={{ overflow: 'hidden', paddingBottom: '16px' }}>
+              <span
+                className={isVisible ? 'animate-text-reveal' : ''}
+                style={{
+                  fontFamily: '"Outfit", sans-serif',
+                  fontSize: 'clamp(3rem, 6.5vw, 6rem)',
+                  lineHeight: '1.1',
+                  fontWeight: 700,
+                  letterSpacing: '-0.03em',
+                  color: '#0D0A1A',
+                  display: 'inline-block',
+                  opacity: isVisible ? undefined : 0,
+                  animationDelay: isVisible ? `${0.2 + i * 0.05}s` : undefined,
+                }}
+              >
+                {word}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Video Section */}
+      <div
+        className={isVisible ? 'animate-text-reveal' : ''}
+        style={{
+          width: '100%',
+          maxWidth: '1526px',
+          padding: '0 115px',
+          margin: '50px auto 0 auto',
+          position: 'relative',
+          zIndex: 1,
+          opacity: isVisible ? undefined : 0,
+          animationDelay: isVisible ? '0.6s' : undefined,
+        }}
+      >
+        <div
+          style={{
+            width: '100%',
+            aspectRatio: '16/9',
+            margin: '0 auto',
+            position: 'relative',
+            borderRadius: '24px',
+            overflow: 'hidden',
+            backgroundColor: '#EDE9F8',
+          }}
+        >
+          <video
+            src={project.detailVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        </div>
+      </div>
+
+      {/* Detail Images Section */}
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '1526px',
+          padding: '0 115px',
+          margin: '50px auto 0 auto',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '50px',
+          position: 'relative',
+          zIndex: 1,
+        }}
+      >
+        {project.detailImages.map((img, i) => (
+          <div
+            key={i}
+            className={isVisible ? 'animate-text-reveal' : ''}
+            style={{
+              width: '100%',
+              aspectRatio: '16/9',
+              borderRadius: '24px',
+              overflow: 'hidden',
+              backgroundColor: '#EDE9F8',
+              opacity: isVisible ? undefined : 0,
+              animationDelay: isVisible ? `${0.8 + i * 0.2}s` : undefined,
+            }}
+          >
+            <img src={img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          </div>
+        ))}
+      </div>
+
+      {/* Product Overview Section */}
+      <div
+        style={{
+          width: '100%',
+          maxWidth: '1296px',
+          padding: '0 20px',
+          margin: '150px auto 100px auto',
+          position: 'relative',
+          zIndex: 1,
+        }}
+      >
+        <h2
+          style={{
+            fontFamily: '"Outfit", sans-serif',
+            fontSize: 'clamp(3rem, 5vw, 5rem)',
+            fontWeight: 700,
+            letterSpacing: '-0.03em',
+            color: '#0D0A1A',
+            marginBottom: '0px', // Magnetic string will provide spacing
+          }}
+        >
+          Product overview
+        </h2>
+
+        {/* Interactive Magnetic String */}
+        <MagneticString />
+
+        <div style={{ display: 'flex', gap: '100px', marginTop: '20px' }}>
+          <div style={{ width: '250px' }}>
+            <p style={{
+              fontFamily: '"Inter", sans-serif',
+              fontSize: '14px',
+              fontWeight: 500,
+              letterSpacing: '0.05em',
+              color: '#0D0A1A',
+              textTransform: 'uppercase'
+            }}>
+              Product Overview
+            </p>
+          </div>
+          <div style={{ flex: 1 }}>
+            <p style={{
+              fontFamily: '"Inter", sans-serif',
+              fontSize: '28px',
+              lineHeight: '1.5',
+              fontWeight: 400,
+              color: '#0D0A1A',
+            }}>
+              {project.overviewText}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

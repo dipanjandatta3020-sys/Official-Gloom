@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 
 export default function ContactCTA() {
-  const [isHovered, setIsHovered] = useState(false);
   const ref = useRef<HTMLElement>(null);
   const [isInView, setIsInView] = useState(false);
 
@@ -30,43 +29,20 @@ export default function ContactCTA() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        overflow: 'hidden',
-        backgroundColor: '#050505',
-        color: '#ffffff',
-        borderRadius: '40px 40px 0 0',
-        marginTop: '40px',
+        background: 'transparent',
+        color: '#F0EBF8',
       }}
     >
-      {/* Background Video */}
+
+      {/* Decorative Glow */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          zIndex: 0,
+          background: 'radial-gradient(ellipse 60% 60% at 50% 50%, rgba(192,96,208,0.15) 0%, rgba(123,92,229,0.08) 40%, transparent 70%)',
+          zIndex: 1,
         }}
-      >
-        <video
-          src="https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            opacity: 0.4,
-            filter: 'grayscale(100%)',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.4)',
-          }}
-        />
-      </div>
+      />
 
       {/* Content */}
       <div
@@ -87,10 +63,12 @@ export default function ContactCTA() {
           <h2
             className={`contact-cta-heading ${isInView ? 'animate-text-reveal animation-delay-100' : ''}`}
             style={{
+              fontFamily: '"Outfit", sans-serif',
               fontSize: 'clamp(3rem, 8vw, 8rem)',
               lineHeight: 1.05,
-              fontWeight: 500,
-              letterSpacing: '-0.02em',
+              fontWeight: 700,
+              letterSpacing: '-0.03em',
+              color: '#F0EBF8',
               margin: 0,
               opacity: isInView ? undefined : 0,
             }}
@@ -104,10 +82,12 @@ export default function ContactCTA() {
           <h2
             className={`contact-cta-heading ${isInView ? 'animate-text-reveal animation-delay-200' : ''}`}
             style={{
+              fontFamily: '"Outfit", sans-serif',
               fontSize: 'clamp(3rem, 8vw, 8rem)',
               lineHeight: 1.05,
-              fontWeight: 500,
-              letterSpacing: '-0.02em',
+              fontWeight: 700,
+              letterSpacing: '-0.03em',
+              color: '#F0EBF8',
               margin: 0,
               opacity: isInView ? undefined : 0,
             }}
@@ -118,42 +98,35 @@ export default function ContactCTA() {
 
         <div
           className={isInView ? 'animate-text-reveal animation-delay-300' : ''}
-          style={{ marginTop: '56px', cursor: 'pointer', opacity: isInView ? undefined : 0 }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          style={{ marginTop: '56px', opacity: isInView ? undefined : 0 }}
         >
-          <div
-            className="contact-cta-btn-wrap"
+          <button
+            className="cta-btn contact-cta-btn-wrap"
             style={{
-              position: 'relative',
-              overflow: 'hidden',
               borderRadius: '100px',
-              border: isHovered
-                ? '1px solid #ffffff'
-                : '1px solid rgba(255, 255, 255, 0.4)',
+              border: '1px solid rgba(255, 255, 255, 0.35)',
               padding: '24px 64px',
-              transition: 'all 0.5s ease',
-              backgroundColor: isHovered
-                ? '#ffffff'
-                : 'transparent',
+              backgroundColor: 'transparent',
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
             <span
               className="contact-cta-btn-text"
               style={{
-                position: 'relative',
-                zIndex: 10,
+                fontFamily: '"Outfit", sans-serif',
                 fontSize: 'clamp(2rem, 5vw, 5rem)',
                 lineHeight: 1,
-                fontWeight: 500,
-                letterSpacing: '-0.02em',
-                transition: 'color 0.5s ease',
-                color: isHovered ? '#050505' : '#ffffff',
+                fontWeight: 700,
+                letterSpacing: '0.05em',
+                color: '#ffffff',
               }}
             >
               TELL US
             </span>
-          </div>
+          </button>
         </div>
       </div>
     </section>

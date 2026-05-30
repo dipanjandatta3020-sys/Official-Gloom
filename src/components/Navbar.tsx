@@ -4,7 +4,7 @@ import { Menu, X } from 'lucide-react';
 
 const navLinks = ['Services', 'Projects', 'Company', 'Blog', 'Contacts'];
 
-export default function Navbar() {
+export default function Navbar({ onServicesClick, onProjectsClick, onLogoClick }: { onServicesClick?: () => void; onProjectsClick?: () => void; onLogoClick?: () => void }) {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -43,9 +43,10 @@ export default function Navbar() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: 'rgba(255, 255, 255, 0.92)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
+          backgroundColor: 'rgba(255, 255, 255, 0.88)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderBottom: '1px solid rgba(123, 92, 229, 0.15)',
         }}
       >
         <div
@@ -56,19 +57,23 @@ export default function Navbar() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            padding: '28px 115px',
+            padding: '20px 115px',
           }}
         >
           {/* Logo with reveal animation */}
           <div style={{ overflow: 'hidden', paddingBottom: '4px' }}>
             <a
               href="#"
+              onClick={(e) => { e.preventDefault(); onLogoClick?.(); }}
               className={isVisible ? 'animate-text-reveal animation-delay-100' : ''}
               style={{
-                fontSize: '1.4rem',
+                background: 'linear-gradient(135deg, #7B5CE5, #E040A0)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                fontFamily: '"Outfit", sans-serif',
+                fontSize: '1.85rem',
                 fontWeight: 700,
-                letterSpacing: '-0.04em',
-                color: '#0a0a0a',
+                letterSpacing: '-0.02em',
                 textDecoration: 'none',
                 cursor: 'pointer',
                 userSelect: 'none',
@@ -87,9 +92,11 @@ export default function Navbar() {
               display: 'flex',
               alignItems: 'center',
               gap: '40px',
-              fontSize: '0.95rem',
+              fontSize: '0.9rem',
               fontWeight: 500,
-              color: '#0a0a0a',
+              color: '#4A3F6B',
+              fontFamily: '"Inter", sans-serif',
+              letterSpacing: '0.01em',
             }}
           >
             {navLinks.map((link, index) => (
@@ -104,8 +111,17 @@ export default function Navbar() {
                     display: 'block',
                     opacity: isVisible ? undefined : 0,
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.4')}
-                  onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
+                  onClick={(e) => {
+                    if (link === 'Services' && onServicesClick) {
+                      e.preventDefault();
+                      onServicesClick();
+                    } else if (link === 'Projects' && onProjectsClick) {
+                      e.preventDefault();
+                      onProjectsClick();
+                    }
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.color = '#0D0A1A'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.color = 'inherit'; }}
                 >
                   {link}
                 </a>
@@ -118,6 +134,7 @@ export default function Navbar() {
             className="mobile-menu-btn"
             onClick={() => setIsMobileMenuOpen(true)}
             aria-label="Open menu"
+            style={{ color: '#0D0A1A' }}
           >
             <Menu size={28} />
           </button>
@@ -135,7 +152,7 @@ export default function Navbar() {
             style={{
               position: 'fixed',
               inset: 0,
-              backgroundColor: '#ffffff',
+              backgroundColor: '#06030D',
               zIndex: 100,
               display: 'flex',
               flexDirection: 'column',
@@ -143,12 +160,20 @@ export default function Navbar() {
             }}
           >
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '60px' }}>
-              <span style={{ fontSize: '1.4rem', fontWeight: 700, letterSpacing: '-0.04em', color: '#0a0a0a' }}>
+              <span style={{ 
+                background: 'linear-gradient(135deg, #7B5CE5, #E040A0)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                fontFamily: '"Outfit", sans-serif',
+                fontSize: '1.85rem', 
+                fontWeight: 700, 
+                letterSpacing: '-0.02em' 
+              }}>
                 Gloom
               </span>
               <button
                 onClick={() => setIsMobileMenuOpen(false)}
-                style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#0a0a0a', display: 'flex' }}
+                style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: '#F0EBF8', display: 'flex' }}
                 aria-label="Close menu"
               >
                 <X size={32} />
@@ -166,9 +191,10 @@ export default function Navbar() {
                   transition={{ duration: 0.4, delay: 0.2 + index * 0.05 }}
                   style={{
                     textDecoration: 'none',
-                    color: '#0a0a0a',
+                    color: '#F0EBF8',
+                    fontFamily: '"Outfit", sans-serif',
                     fontSize: '2.5rem',
-                    fontWeight: 600,
+                    fontWeight: 700,
                     letterSpacing: '-0.02em',
                   }}
                 >
@@ -181,7 +207,7 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
-              style={{ marginTop: 'auto', paddingBottom: '40px', fontSize: '14px', color: '#666666' }}
+              style={{ marginTop: 'auto', paddingBottom: '40px', fontSize: '14px', color: '#9B8EC4', fontFamily: '"Inter", sans-serif' }}
             >
               info@gloom.com <br/>
               +1 301 549 9309

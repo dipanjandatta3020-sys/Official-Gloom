@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
 
 *,
 *::before,
@@ -14,7 +14,7 @@ html {
 
 body {
   background-color: #ffffff;
-  color: #0a0a0a;
+  color: #0D0A1A;
   font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -22,7 +22,7 @@ body {
 }
 
 ::selection {
-  background-color: #0a0a0a;
+  background-color: #7B5CE5;
   color: #ffffff;
 }
 
@@ -31,12 +31,10 @@ body {
   from {
     opacity: 0;
     transform: translateY(32px);
-    filter: blur(8px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
-    filter: blur(0);
   }
 }
 
@@ -77,34 +75,64 @@ body {
   transform: translateY(0);
 }
 
-/* Dark fill variant (for white/light sections) */
+/* Dark variant — used on dark sections, white text, subtle white wipe fill */
 .cta-btn-dark {
-  color: #050505;
-  border: 1px solid #050505;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
   background-color: transparent;
 }
 
 .cta-btn-dark::before {
-  background-color: #050505;
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
 .cta-btn-dark:hover {
   color: #ffffff;
 }
 
+.contact-cta-btn-wrap::before {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
 /* Light fill variant (for dark sections) */
 .cta-btn-light {
   color: #ffffff;
-  border: 1px solid #ffffff;
+  border: 1px solid rgba(255,255,255,0.35);
   background-color: transparent;
 }
 
 .cta-btn-light::before {
-  background-color: #ffffff;
+  background-color: rgba(255,255,255,0.12);
 }
 
 .cta-btn-light:hover {
-  color: #050505;
+  color: #ffffff;
+}
+
+/* For light sections: dark outline, fills with dark on hover */
+.cta-btn-on-light {
+  color: #0D0A1A;
+  border: 1.5px solid #0D0A1A;
+  background-color: transparent;
+}
+.cta-btn-on-light::before {
+  background-color: #0D0A1A;
+}
+.cta-btn-on-light:hover {
+  color: #ffffff;
+}
+
+/* For light sections: accent violet outline, fills with gradient on hover */
+.cta-btn-accent {
+  color: #7B5CE5;
+  border: 1.5px solid #7B5CE5;
+  background-color: transparent;
+}
+.cta-btn-accent::before {
+  background: linear-gradient(135deg, #7B5CE5 0%, #C060D0 50%, #E040A0 100%);
+}
+.cta-btn-accent:hover {
+  color: #ffffff;
 }
 
 /* Mobile Menu Toggle Button */
@@ -113,7 +141,7 @@ body {
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #0a0a0a;
+  color: #0D0A1A;
 }
 
 /* ================================== */
@@ -302,4 +330,41 @@ body {
     width: 75px !important;
     height: 75px !important;
   }
+}
+
+/* ================================== */
+/* Hero Blob Animations               */
+/* ================================== */
+
+@keyframes blobFloat1 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  33%  { transform: translate(30px, -40px) scale(1.08); }
+  66%  { transform: translate(-20px, 20px) scale(0.95); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes blobFloat2 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  33%  { transform: translate(-35px, 25px) scale(1.06); }
+  66%  { transform: translate(20px, -30px) scale(0.97); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes blobFloat3 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  50%  { transform: translate(-25px, 35px) scale(1.05); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes blobFloat4 {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  40%  { transform: translate(20px, -20px) scale(1.07); }
+  80%  { transform: translate(-15px, 15px) scale(0.96); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes blobPulse {
+  0%   { opacity: 0.9; transform: translateX(-50%) scale(1); }
+  50%  { opacity: 1;   transform: translateX(-50%) scale(1.05); }
+  100% { opacity: 0.9; transform: translateX(-50%) scale(1); }
 }
