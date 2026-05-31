@@ -1,12 +1,14 @@
 import ImageSlideshow from './ImageSlideshow';
 import EditableText from './admin/EditableText';
-import EditableMedia from './admin/EditableMedia';
 import EditableImageArray from './admin/EditableImageArray';
 import { useSiteData } from '../context/SiteDataContext';
 
 export default function FeaturedProjects() {
-  const { data } = useSiteData();
+  const { data, isAdmin, updateData } = useSiteData();
   const projects = data.projects;
+  const featuredProjects = projects.filter((p: any) => p.isFeatured);
+  const leftCol = featuredProjects.filter((_, i) => i % 2 === 0);
+  const rightCol = featuredProjects.filter((_, i) => i % 2 !== 0);
   return (
     <section
       className="featured-section"
@@ -75,7 +77,7 @@ export default function FeaturedProjects() {
               width: '482px',
             }}
           >
-            {projects.filter((_, i) => i % 2 === 0).map((project) => (
+            {leftCol.map((project: any) => (
               <div 
                 key={project.id} 
                 style={{ display: 'flex', flexDirection: 'column', cursor: 'pointer' }}
@@ -135,7 +137,7 @@ export default function FeaturedProjects() {
               marginTop: '317px',
             }}
           >
-            {projects.filter((_, i) => i % 2 !== 0).map((project) => (
+            {rightCol.map((project: any) => (
               <div 
                 key={project.id} 
                 style={{ display: 'flex', flexDirection: 'column', cursor: 'pointer' }}
@@ -180,6 +182,33 @@ export default function FeaturedProjects() {
                     display: 'block'
                   }}
                 />
+                {isAdmin && (
+                  <div style={{ marginTop: '12px' }}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        // Remove this project from featured
+                        const newProjects = projects.map((p: any) =>
+                          p.id === project.id ? { ...p, isFeatured: false } : p
+                        );
+                        updateData(['projects'], newProjects);
+                      }}
+                      style={{
+                        backgroundColor: 'rgba(224,64,160,0.15)',
+                        color: '#E040A0',
+                        border: '1px solid rgba(224,64,160,0.35)',
+                        borderRadius: '20px',
+                        padding: '6px 16px',
+                        fontSize: '12px',
+                        fontFamily: '"Inter", sans-serif',
+                        cursor: 'pointer',
+                        marginTop: '8px',
+                      }}
+                    >
+                      ✕ Remove from Featured
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>

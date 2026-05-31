@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode, useMemo, useCallback } from 'react';
 import { initialSiteData, SiteData } from '../data/initialData';
 import { db, auth } from '../lib/firebase';
 import { doc, getDoc, setDoc, addDoc, collection, serverTimestamp } from 'firebase/firestore';
@@ -57,9 +57,24 @@ export const SiteDataProvider = ({ children }: { children: ReactNode }) => {
         const docSnap = await getDoc(doc(db, 'siteContent', 'main'));
         if (docSnap.exists()) {
           const fetchedData = docSnap.data() as SiteData;
+
+          // Merge each fetched project with its initialData counterpart so that
+          // new fields (isFeatured, category) are never lost when Firestore has old data.
+          const mergedProjects = (fetchedData.projects || []).map((fp: any) => {
+            const initial = initialSiteData.projects.find((ip) => ip.id === fp.id);
+            return {
+              ...(initial || {}),  // new fields as defaults
+              ...fp,               // Firestore values override (title, images, etc.)
+              // always keep new fields from initial if Firestore doesn't have them
+              category: fp.category ?? initial?.category ?? 'Websites',
+              isFeatured: fp.isFeatured ?? initial?.isFeatured ?? true,
+            };
+          });
+
           setData({ 
             ...initialSiteData, 
             ...fetchedData,
+            projects: mergedProjects,
             footer: {
               ...initialSiteData.footer,
               ...(fetchedData.footer || {}),
@@ -91,13 +106,13 @@ export const SiteDataProvider = ({ children }: { children: ReactNode }) => {
     return () => window.removeEventListener('hashchange', checkHash);
   }, []);
 
-  // Update specific field in state
-  const updateData = (path: string[], value: any) => {
+  const updateData = useCallback((path: string[], value: any) => {
     setData(prev => updateNestedProperty(prev, path, value));
-  };
+  }, []);
 
-  // Persist state to Firestore
-  const saveData = async () => {
+  // Persist state to Firestore — MUST be useCallback([data]) so it always
+  // saves the CURRENT data state, not the snapshot from first render.
+  const saveData = useCallback(async () => {
     try {
       // 1. Archive current version to history first
       await addDoc(collection(db, 'siteHistory'), {
@@ -112,7 +127,11 @@ export const SiteDataProvider = ({ children }: { children: ReactNode }) => {
       console.error("Error saving data:", e);
       alert('Failed to save to Firebase. Check console.');
     }
-  };
+  }, [data]);
+
+  const contextValue = useMemo(() => ({
+    data, isAdmin, isAuthenticated, isLoading, setIsAdmin, updateData, saveData
+  }), [data, isAdmin, isAuthenticated, isLoading, updateData, saveData]);
 
   if (isLoading) {
     return (
@@ -137,7 +156,7 @@ export const SiteDataProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <SiteDataContext.Provider value={{ data, isAdmin, isAuthenticated, isLoading, setIsAdmin, updateData, saveData }}>
+    <SiteDataContext.Provider value={contextValue}>
       {children}
     </SiteDataContext.Provider>
   );

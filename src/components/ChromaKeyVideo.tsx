@@ -10,9 +10,15 @@ export default function ChromaKeyVideo({ src, style, className }: ChromaKeyVideo
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef<number>(0);
+  const lastFrameRef = useRef<number>(0);
 
+  const processFrame = useCallback((timestamp: number) => {
+    if (timestamp - lastFrameRef.current < 33) {
+      rafRef.current = requestAnimationFrame(processFrame);
+      return;
+    }
+    lastFrameRef.current = timestamp;
 
-  const processFrame = useCallback(() => {
     const video = videoRef.current;
     const canvas = canvasRef.current;
     
@@ -32,13 +38,15 @@ export default function ChromaKeyVideo({ src, style, className }: ChromaKeyVideo
     if (!ctx) return;
 
     // Match canvas size to video
-    if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) {
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
+    const w = Math.floor(video.videoWidth / 2);
+    const h = Math.floor(video.videoHeight / 2);
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
     }
 
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(video, 0, 0, w, h);
+    const imageData = ctx.getImageData(0, 0, w, h);
     const data = imageData.data;
 
     for (let i = 0; i < data.length; i += 4) {

@@ -27,7 +27,7 @@ export const initialSiteData = {
     },
     socialLinks: {
       instagram: "https://instagram.com",
-      youtube: "https://youtube.com",
+      linkedin: "https://linkedin.com",
       facebook: "https://facebook.com"
     }
   },
@@ -103,6 +103,8 @@ export const initialSiteData = {
     {
       id: 1,
       title: 'Punto Pago',
+      category: 'Websites',
+      isFeatured: true,
       description: 'The First Super-App in Latin America',
       images: [
         'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=482&h=651&fit=crop',
@@ -120,6 +122,8 @@ export const initialSiteData = {
     {
       id: 2,
       title: 'Smart Watch UI',
+      category: 'Websites',
+      isFeatured: true,
       description: 'Wearable Design',
       images: [
         'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=482&h=651&fit=crop',
@@ -137,6 +141,8 @@ export const initialSiteData = {
     {
       id: 3,
       title: 'Nike Air',
+      category: 'Websites',
+      isFeatured: true,
       description: 'E-commerce Platform',
       images: [
         'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=482&h=651&fit=crop',
@@ -154,6 +160,8 @@ export const initialSiteData = {
     {
       id: 4,
       title: 'Wooden Stool',
+      category: 'Websites',
+      isFeatured: true,
       description: 'Furniture Brand Identity',
       images: [
         'https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=482&h=651&fit=crop',
@@ -171,6 +179,8 @@ export const initialSiteData = {
     {
       id: 5,
       title: 'Polaroid Capture',
+      category: 'Websites',
+      isFeatured: true,
       description: 'Photography App',
       images: [
         'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=482&h=651&fit=crop',

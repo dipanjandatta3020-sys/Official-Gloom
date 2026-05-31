@@ -3,7 +3,7 @@ import { useSiteData } from '../context/SiteDataContext';
 import ImageSlideshow from './ImageSlideshow';
 
 export default function ProjectsPage() {
-  const { data } = useSiteData();
+  const { data, isAdmin, updateData } = useSiteData();
   const projects = data.projects;
   const [isVisible, setIsVisible] = useState(false);
   const [activeFilter, setActiveFilter] = useState('All Projects');
@@ -15,8 +15,12 @@ export default function ProjectsPage() {
 
   const filters = ['All Projects', 'Websites', 'Applications'];
 
-  const leftColumn = projects.filter((_, i) => i % 2 === 0);
-  const rightColumn = projects.filter((_, i) => i % 2 !== 0);
+  const filteredProjects = activeFilter === 'All Projects'
+    ? projects
+    : projects.filter((p: any) => p.category === activeFilter);
+
+  const leftColumn = filteredProjects.filter((_, i) => i % 2 === 0);
+  const rightColumn = filteredProjects.filter((_, i) => i % 2 !== 0);
 
   return (
     <section
@@ -155,6 +159,41 @@ export default function ProjectsPage() {
             </button>
           ))}
         </div>
+        
+        {isAdmin && (
+          <div style={{ marginTop: '32px', position: 'relative', zIndex: 1 }}>
+            <button
+              onClick={() => {
+                const newProject = {
+                  id: Date.now(),
+                  title: 'New Project',
+                  description: 'Project description',
+                  category: activeFilter === 'Applications' ? 'Applications' : 'Websites',
+                  images: ['https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=482&h=651&fit=crop'],
+                  detailHeadline: 'Project headline',
+                  detailVideo: '',
+                  detailImages: ['', ''],
+                  overviewText: 'Project overview text.',
+                  isFeatured: false,
+                };
+                updateData(['projects'], [...data.projects, newProject]);
+              }}
+              style={{
+                backgroundColor: '#7B5CE5',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '100px',
+                padding: '14px 32px',
+                fontSize: '15px',
+                fontFamily: '"Inter", sans-serif',
+                fontWeight: 500,
+                cursor: 'pointer',
+              }}
+            >
+              + Add {activeFilter === 'Applications' ? 'Application' : 'Website'} Project
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Projects Grid */}
@@ -171,12 +210,7 @@ export default function ProjectsPage() {
           animationDelay: isVisible ? '0.4s' : undefined,
         }}
       >
-        {activeFilter === 'Applications' ? (
-          <div style={{ textAlign: 'center', padding: '100px 0', color: '#6B5F8A', fontFamily: '"Inter", sans-serif', fontSize: '24px' }}>
-            Coming soon
-          </div>
-        ) : (
-          <div
+        <div
             className="projects-grid-row"
             style={{
               display: 'flex',
@@ -218,6 +252,52 @@ export default function ProjectsPage() {
                   >
                     <strong>{project.title}</strong> <span style={{ color: '#6B5F8A' }}>– {project.description}</span>
                   </h3>
+                  {isAdmin && (
+                    <div style={{ display: 'flex', gap: '8px', marginTop: '10px', flexWrap: 'wrap' }}>
+                      {/* Featured toggle */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const newProjects = data.projects.map((p: any) =>
+                            p.id === project.id ? { ...p, isFeatured: !p.isFeatured } : p
+                          );
+                          updateData(['projects'], newProjects);
+                        }}
+                        style={{
+                          backgroundColor: project.isFeatured ? 'rgba(224,64,160,0.2)' : 'rgba(123,92,229,0.15)',
+                          color: project.isFeatured ? '#E040A0' : '#7B5CE5',
+                          border: `1px solid ${project.isFeatured ? 'rgba(224,64,160,0.4)' : 'rgba(123,92,229,0.3)'}`,
+                          borderRadius: '20px',
+                          padding: '6px 16px',
+                          fontSize: '12px',
+                          fontFamily: '"Inter", sans-serif',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        {project.isFeatured ? '★ Featured' : '☆ Add to Featured'}
+                      </button>
+                      {/* Delete button */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (!window.confirm(`Delete "${project.title}"? This cannot be undone.`)) return;
+                          updateData(['projects'], data.projects.filter((p: any) => p.id !== project.id));
+                        }}
+                        style={{
+                          backgroundColor: 'rgba(220,38,38,0.15)',
+                          color: '#ef4444',
+                          border: '1px solid rgba(220,38,38,0.35)',
+                          borderRadius: '20px',
+                          padding: '6px 16px',
+                          fontSize: '12px',
+                          fontFamily: '"Inter", sans-serif',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        🗑 Delete
+                      </button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -255,11 +335,56 @@ export default function ProjectsPage() {
                   >
                     <strong>{project.title}</strong> <span style={{ color: '#6B5F8A' }}>– {project.description}</span>
                   </h3>
+                  {isAdmin && (
+                    <div style={{ display: 'flex', gap: '8px', marginTop: '10px', flexWrap: 'wrap' }}>
+                      {/* Featured toggle */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          const newProjects = data.projects.map((p: any) =>
+                            p.id === project.id ? { ...p, isFeatured: !p.isFeatured } : p
+                          );
+                          updateData(['projects'], newProjects);
+                        }}
+                        style={{
+                          backgroundColor: project.isFeatured ? 'rgba(224,64,160,0.2)' : 'rgba(123,92,229,0.15)',
+                          color: project.isFeatured ? '#E040A0' : '#7B5CE5',
+                          border: `1px solid ${project.isFeatured ? 'rgba(224,64,160,0.4)' : 'rgba(123,92,229,0.3)'}`,
+                          borderRadius: '20px',
+                          padding: '6px 16px',
+                          fontSize: '12px',
+                          fontFamily: '"Inter", sans-serif',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        {project.isFeatured ? '★ Featured' : '☆ Add to Featured'}
+                      </button>
+                      {/* Delete button */}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (!window.confirm(`Delete "${project.title}"? This cannot be undone.`)) return;
+                          updateData(['projects'], data.projects.filter((p: any) => p.id !== project.id));
+                        }}
+                        style={{
+                          backgroundColor: 'rgba(220,38,38,0.15)',
+                          color: '#ef4444',
+                          border: '1px solid rgba(220,38,38,0.35)',
+                          borderRadius: '20px',
+                          padding: '6px 16px',
+                          fontSize: '12px',
+                          fontFamily: '"Inter", sans-serif',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        🗑 Delete
+                      </button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
           </div>
-        )}
       </div>
     </section>
   );

@@ -17,6 +17,9 @@
   transform: scale(1);
   animation-iteration-count: infinite;
   animation-timing-function: linear;
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* For 3 images (4.5s cycle) */
