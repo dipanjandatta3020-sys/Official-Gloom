@@ -57,7 +57,18 @@ export const SiteDataProvider = ({ children }: { children: ReactNode }) => {
         const docSnap = await getDoc(doc(db, 'siteContent', 'main'));
         if (docSnap.exists()) {
           const fetchedData = docSnap.data() as SiteData;
-          setData({ ...initialSiteData, ...fetchedData });
+          setData({ 
+            ...initialSiteData, 
+            ...fetchedData,
+            footer: {
+              ...initialSiteData.footer,
+              ...(fetchedData.footer || {}),
+              socialLinks: {
+                ...initialSiteData.footer.socialLinks,
+                ...(fetchedData.footer?.socialLinks || {})
+              }
+            }
+          });
         }
       } catch (e) {
         console.error('Failed to load site data from Firestore', e);

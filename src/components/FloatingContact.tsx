@@ -12,7 +12,10 @@ export default function FloatingContact() {
         justifyContent: 'center',
       }}
     >
-      <div
+      <a
+        href="https://wa.me/918131949105"
+        target="_blank"
+        rel="noreferrer"
         className="floating-contact-circle"
         style={{
           position: 'relative',
@@ -23,6 +26,7 @@ export default function FloatingContact() {
           justifyContent: 'center',
           cursor: 'pointer',
           transition: 'transform 0.3s ease',
+          textDecoration: 'none',
         }}
         onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
         onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
@@ -75,7 +79,7 @@ export default function FloatingContact() {
             style={{ width: '100%', height: '100%', objectFit: 'contain' }}
           />
         </div>
-      </div>
+      </a>
 
       <style>{`
         @keyframes spinText {

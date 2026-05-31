@@ -53,14 +53,7 @@ export default function App() {
                 style={{ width: '100%', backgroundColor: '#ffffff' }}
               >
                 <ServicesPage />
-                <div style={{
-                  background: 'linear-gradient(160deg, #0E0818 0%, #1A1124 30%, #2E1A4A 65%, #3D2468 100%)',
-                  borderRadius: '80px 80px 0 0',
-                  marginTop: '-80px',
-                  position: 'relative',
-                  zIndex: 3,
-                  overflow: 'hidden',
-                }}>
+                <div className="footer-wrapper">
                   <ContactCTA />
                   <Footer />
                 </div>
@@ -75,14 +68,7 @@ export default function App() {
                 style={{ width: '100%', backgroundColor: '#ffffff' }}
               >
                 <ProjectsPage />
-                <div style={{
-                  background: 'linear-gradient(160deg, #0E0818 0%, #1A1124 30%, #2E1A4A 65%, #3D2468 100%)',
-                  borderRadius: '80px 80px 0 0',
-                  marginTop: '-80px',
-                  position: 'relative',
-                  zIndex: 3,
-                  overflow: 'hidden',
-                }}>
+                <div className="footer-wrapper">
                   <ContactCTA />
                   <Footer />
                 </div>
@@ -97,14 +83,7 @@ export default function App() {
                 style={{ width: '100%', backgroundColor: '#ffffff' }}
               >
                 <ProjectDetailPage id={parseInt(route.split('-')[1], 10)} />
-                <div style={{
-                  background: 'linear-gradient(160deg, #0E0818 0%, #1A1124 30%, #2E1A4A 65%, #3D2468 100%)',
-                  borderRadius: '80px 80px 0 0',
-                  marginTop: '-80px',
-                  position: 'relative',
-                  zIndex: 3,
-                  overflow: 'hidden',
-                }}>
+                <div className="footer-wrapper">
                   <ContactCTA />
                   <Footer />
                 </div>
@@ -119,14 +98,7 @@ export default function App() {
                 style={{ width: '100%' }}
               >
                 <HomePage openServices={navigateToServices} />
-                <div style={{
-                  background: 'linear-gradient(160deg, #0E0818 0%, #1A1124 30%, #2E1A4A 65%, #3D2468 100%)',
-                  borderRadius: '80px 80px 0 0',
-                  marginTop: '-80px',
-                  position: 'relative',
-                  zIndex: 3,
-                  overflow: 'hidden',
-                }}>
+                <div className="footer-wrapper">
                   <ContactCTA />
                   <Footer />
                 </div>

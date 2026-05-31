@@ -27,6 +27,7 @@ export default function ImageSlideshow({ images }: { images: string[] }) {
               animationDuration: `${cycleTime}s` 
             }}
             alt={`Slide ${i + 1}`}
+            loading="lazy"
           />
         );
       })}

@@ -11,6 +11,7 @@ export default function ChromaKeyVideo({ src, style, className }: ChromaKeyVideo
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef<number>(0);
 
+
   const processFrame = useCallback(() => {
     const video = videoRef.current;
     const canvas = canvasRef.current;

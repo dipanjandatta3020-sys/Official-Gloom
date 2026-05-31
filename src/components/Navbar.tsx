@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'motion/react';
 import { Menu, X } from 'lucide-react';
+import EditableText from './admin/EditableText';
 
-const navLinks = ['Services', 'Projects', 'Company', 'Blog', 'Contacts'];
+const navLinks = ['Services', 'Projects', 'Company', 'Contacts'];
 
 export default function Navbar({ onServicesClick, onProjectsClick, onLogoClick }: { onServicesClick?: () => void; onProjectsClick?: () => void; onLogoClick?: () => void }) {
   const { scrollY } = useScroll();
@@ -48,6 +49,7 @@ export default function Navbar({ onServicesClick, onProjectsClick, onLogoClick }
           WebkitBackdropFilter: 'blur(20px)',
           borderBottom: '1px solid rgba(123, 92, 229, 0.15)',
         }}
+        className="main-navbar"
       >
         <div
           className="navbar-inner"
@@ -92,7 +94,7 @@ export default function Navbar({ onServicesClick, onProjectsClick, onLogoClick }
               display: 'flex',
               alignItems: 'center',
               gap: '40px',
-              fontSize: '0.9rem',
+              fontSize: '0.94rem',
               fontWeight: 500,
               color: '#4A3F6B',
               fontFamily: '"Inter", sans-serif',
@@ -102,7 +104,9 @@ export default function Navbar({ onServicesClick, onProjectsClick, onLogoClick }
             {navLinks.map((link, index) => (
               <div key={link} style={{ overflow: 'hidden', paddingBottom: '4px' }}>
                 <a
-                  href={`#${link.toLowerCase()}`}
+                  href={link === 'Contacts' ? 'https://wa.me/918131949105' : `#${link.toLowerCase()}`}
+                  target={link === 'Contacts' ? '_blank' : undefined}
+                  rel={link === 'Contacts' ? 'noreferrer' : undefined}
                   className={isVisible ? `animate-text-reveal animation-delay-${(index + 1) * 100}` : ''}
                   style={{
                     textDecoration: 'none',
@@ -184,7 +188,9 @@ export default function Navbar({ onServicesClick, onProjectsClick, onLogoClick }
               {navLinks.map((link, index) => (
                 <motion.a
                   key={link}
-                  href={`#${link.toLowerCase()}`}
+                  href={link === 'Contacts' ? 'https://wa.me/918131949105' : `#${link.toLowerCase()}`}
+                  target={link === 'Contacts' ? '_blank' : undefined}
+                  rel={link === 'Contacts' ? 'noreferrer' : undefined}
                   onClick={() => setIsMobileMenuOpen(false)}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -193,7 +199,7 @@ export default function Navbar({ onServicesClick, onProjectsClick, onLogoClick }
                     textDecoration: 'none',
                     color: '#F0EBF8',
                     fontFamily: '"Outfit", sans-serif',
-                    fontSize: '2.5rem',
+                    fontSize: '1.5rem',
                     fontWeight: 700,
                     letterSpacing: '-0.02em',
                   }}
@@ -209,8 +215,8 @@ export default function Navbar({ onServicesClick, onProjectsClick, onLogoClick }
               transition={{ delay: 0.6 }}
               style={{ marginTop: 'auto', paddingBottom: '40px', fontSize: '14px', color: '#9B8EC4', fontFamily: '"Inter", sans-serif' }}
             >
-              info@gloom.com <br/>
-              +1 301 549 9309
+              <EditableText path={['footer', 'office1', 'email']} as="span" style={{ display: 'block', marginBottom: '4px' }} />
+              <EditableText path={['footer', 'office2', 'phone']} as="span" style={{ display: 'block' }} />
             </motion.div>
           </motion.div>
         )}

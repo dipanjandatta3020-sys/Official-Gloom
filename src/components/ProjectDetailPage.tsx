@@ -102,11 +102,11 @@ export default function ProjectDetailPage({ id }: ProjectDetailPageProps) {
         </div>
 
         {/* Staggered Word Reveal for Headline */}
-        <EditableText path={['projects', pIndexStr, 'detailHeadline']} as="div" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px' }}>
+        <EditableText path={['projects', pIndexStr, 'detailHeadline']} as="div" className="hero-word-gap" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px' }}>
           {project.detailHeadline.split(' ').map((word: string, i: number) => (
             <div key={i} style={{ overflow: 'hidden', paddingBottom: '16px' }}>
               <span
-                className={isVisible ? 'animate-text-reveal' : ''}
+                className={`project-detail-headline-word ${isVisible ? 'animate-text-reveal' : ''}`}
                 style={{
                   fontFamily: '"Outfit", sans-serif',
                   fontSize: 'clamp(3rem, 6.5vw, 6rem)',
@@ -128,7 +128,7 @@ export default function ProjectDetailPage({ id }: ProjectDetailPageProps) {
 
       {/* Video Section */}
       <div
-        className={isVisible ? 'animate-text-reveal' : ''}
+        className={`project-detail-hero-media-wrapper ${isVisible ? 'animate-text-reveal' : ''}`}
         style={{
           width: '100%',
           maxWidth: '1526px',
@@ -141,6 +141,7 @@ export default function ProjectDetailPage({ id }: ProjectDetailPageProps) {
         }}
       >
         <div
+          className="project-detail-hero-media"
           style={{
             width: '100%',
             aspectRatio: '16/9',
@@ -161,6 +162,7 @@ export default function ProjectDetailPage({ id }: ProjectDetailPageProps) {
 
       {/* Detail Images Section */}
       <div
+        className="project-detail-media-wrapper"
         style={{
           width: '100%',
           maxWidth: '1526px',
@@ -176,7 +178,7 @@ export default function ProjectDetailPage({ id }: ProjectDetailPageProps) {
         {project.detailImages.map((img, i) => (
           <div
             key={i}
-            className={isVisible ? 'animate-text-reveal' : ''}
+            className={`project-detail-media ${isVisible ? 'animate-text-reveal' : ''}`}
             style={{
               width: '100%',
               aspectRatio: '16/9',
@@ -204,6 +206,7 @@ export default function ProjectDetailPage({ id }: ProjectDetailPageProps) {
         }}
       >
         <h2
+          className="project-detail-overview-title"
           style={{
             fontFamily: '"Outfit", sans-serif',
             fontSize: 'clamp(3rem, 5vw, 5rem)',
@@ -236,6 +239,7 @@ export default function ProjectDetailPage({ id }: ProjectDetailPageProps) {
             <EditableText
               path={['projects', pIndexStr, 'overviewText']}
               as="p"
+              className="project-detail-overview-text"
               style={{
                 fontFamily: '"Inter", sans-serif',
                 fontSize: '28px',

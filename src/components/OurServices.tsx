@@ -188,10 +188,10 @@ export default function OurServices({ openServices }: { openServices: () => void
                   as="p"
                   style={{
                     fontFamily: '"Inter", sans-serif',
-                    fontSize: '15px',
+                    fontSize: '22px',
                     color: '#6B5F8A',
                     margin: 0,
-                    lineHeight: 1.65,
+                    lineHeight: 1.45,
                     display: 'block'
                   }}
                 />
@@ -250,10 +250,10 @@ export default function OurServices({ openServices }: { openServices: () => void
                   as="p"
                   style={{
                     fontFamily: '"Inter", sans-serif',
-                    fontSize: '15px',
+                    fontSize: '22px',
                     color: '#6B5F8A',
                     margin: 0,
-                    lineHeight: 1.65,
+                    lineHeight: 1.45,
                     display: 'block'
                   }}
                 />

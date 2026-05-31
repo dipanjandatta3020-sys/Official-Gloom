@@ -24,6 +24,11 @@ export const initialSiteData = {
       title: "Second Office",
       line1: "Na Perstyne",
       line2: "342/1, 11000 Prague"
+    },
+    socialLinks: {
+      instagram: "https://instagram.com",
+      youtube: "https://youtube.com",
+      facebook: "https://facebook.com"
     }
   },
   homeServices: {

@@ -100,14 +100,26 @@ export default function FeaturedProjects() {
                 <h3
                   style={{
                     fontFamily: '"Inter", sans-serif',
-                    fontSize: '24px',
-                    fontWeight: 500,
+                    fontSize: '22px',
+                    fontWeight: 600,
                     color: '#F0EBF8',
                     margin: '0 0 8px 0',
                   }}
                 >
-                  <strong><EditableText path={['projects', projects.findIndex(p => p.id === project.id).toString(), 'title']} /></strong> <span style={{ color: '#9B8EC4' }}>– <EditableText path={['projects', projects.findIndex(p => p.id === project.id).toString(), 'description']} /></span>
+                  <EditableText path={['projects', projects.findIndex(p => p.id === project.id).toString(), 'title']} />
                 </h3>
+                <EditableText
+                  path={['projects', projects.findIndex(p => p.id === project.id).toString(), 'description']}
+                  as="p"
+                  style={{
+                    fontFamily: '"Inter", sans-serif',
+                    fontSize: '22px',
+                    color: '#9B8EC4',
+                    margin: 0,
+                    lineHeight: 1.45,
+                    display: 'block'
+                  }}
+                />
               </div>
             ))}
           </div>
@@ -148,14 +160,26 @@ export default function FeaturedProjects() {
                 <h3
                   style={{
                     fontFamily: '"Inter", sans-serif',
-                    fontSize: '24px',
-                    fontWeight: 500,
+                    fontSize: '22px',
+                    fontWeight: 600,
                     color: '#F0EBF8',
                     margin: '0 0 8px 0',
                   }}
                 >
-                  <strong><EditableText path={['projects', projects.findIndex(p => p.id === project.id).toString(), 'title']} /></strong> <span style={{ color: '#9B8EC4' }}>– <EditableText path={['projects', projects.findIndex(p => p.id === project.id).toString(), 'description']} /></span>
+                  <EditableText path={['projects', projects.findIndex(p => p.id === project.id).toString(), 'title']} />
                 </h3>
+                <EditableText
+                  path={['projects', projects.findIndex(p => p.id === project.id).toString(), 'description']}
+                  as="p"
+                  style={{
+                    fontFamily: '"Inter", sans-serif',
+                    fontSize: '22px',
+                    color: '#9B8EC4',
+                    margin: 0,
+                    lineHeight: 1.45,
+                    display: 'block'
+                  }}
+                />
               </div>
             ))}
           </div>

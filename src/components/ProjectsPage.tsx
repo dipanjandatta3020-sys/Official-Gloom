@@ -114,7 +114,7 @@ export default function ProjectsPage() {
 
         {/* Filters */}
         <div 
-          className={isVisible ? 'animate-text-reveal' : ''}
+          className={`projects-filter-wrapper ${isVisible ? 'animate-text-reveal' : ''}`}
           style={{ 
             display: 'flex', 
             gap: '32px', 
@@ -126,6 +126,7 @@ export default function ProjectsPage() {
           {filters.map(filter => (
             <button
               key={filter}
+              className="projects-filter-button"
               onClick={() => setActiveFilter(filter)}
               style={{
                 background: 'none',
@@ -158,7 +159,7 @@ export default function ProjectsPage() {
 
       {/* Projects Grid */}
       <div
-        className={isVisible ? 'animate-text-reveal' : ''}
+        className={`projects-grid-wrapper ${isVisible ? 'animate-text-reveal' : ''}`}
         style={{
           width: '100%',
           maxWidth: '1526px',
@@ -176,6 +177,7 @@ export default function ProjectsPage() {
           </div>
         ) : (
           <div
+            className="projects-grid-row"
             style={{
               display: 'flex',
               flexDirection: 'row',
@@ -184,7 +186,7 @@ export default function ProjectsPage() {
             }}
           >
             {/* Left Column */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '80px', width: '500px' }}>
+            <div className="projects-grid-col" style={{ display: 'flex', flexDirection: 'column', gap: '80px', width: '500px' }}>
               {leftColumn.map(project => (
                 <div 
                   key={project.id} 
@@ -192,6 +194,7 @@ export default function ProjectsPage() {
                   onClick={() => window.location.hash = `#project-${project.id}`}
                 >
                   <div
+                    className="projects-grid-img"
                     style={{
                       width: '100%',
                       height: '675px',
@@ -220,7 +223,7 @@ export default function ProjectsPage() {
             </div>
 
             {/* Right Column */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '80px', width: '500px', marginTop: '100px' }}>
+            <div className="projects-grid-col" style={{ display: 'flex', flexDirection: 'column', gap: '80px', width: '500px', marginTop: '100px' }}>
               {rightColumn.map(project => (
                 <div 
                   key={project.id} 
@@ -228,6 +231,7 @@ export default function ProjectsPage() {
                   onClick={() => window.location.hash = `#project-${project.id}`}
                 >
                   <div
+                    className="projects-grid-img"
                     style={{
                       width: '100%',
                       height: '675px',

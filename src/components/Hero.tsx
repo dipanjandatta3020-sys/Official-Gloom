@@ -91,7 +91,7 @@ export default function Hero() {
         {/* Headline line 1 - word by word */}
         <div className="hero-word-gap" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', paddingBottom: '8px' }}>
           {['Digital', 'design', '&'].map((word, i) => (
-            <div key={i} style={{ overflow: 'hidden', paddingBottom: '8px' }}>
+            <div key={i} style={{ overflow: 'hidden', paddingBottom: '20px', marginBottom: '-12px' }}>
               <span
                 className={isVisible ? `animate-text-reveal` : ''}
                 style={{
@@ -109,6 +109,7 @@ export default function Hero() {
                     WebkitBackgroundClip: 'text',
                     backgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
+                    paddingBottom: '0.15em',
                   } : {}),
                 }}
               >
@@ -121,7 +122,7 @@ export default function Hero() {
         {/* Headline line 2 - word by word */}
         <div className="hero-word-gap" style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '48px' }}>
           {['development', 'agency'].map((word, i) => (
-            <div key={i} style={{ overflow: 'hidden', paddingBottom: '8px' }}>
+            <div key={i} style={{ overflow: 'hidden', paddingBottom: '20px', marginBottom: '-12px' }}>
               <span
                 className={isVisible ? `animate-text-reveal` : ''}
                 style={{

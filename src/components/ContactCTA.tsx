@@ -27,8 +27,6 @@ export default function ContactCTA() {
       style={{
         position: 'relative',
         width: '100%',
-        height: '100vh',
-        minHeight: '700px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

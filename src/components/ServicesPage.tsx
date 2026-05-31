@@ -232,8 +232,8 @@ export default function ServicesPage() {
 
         {/* Section 1 */}
         <MagneticString />
-        <div style={{ display: 'flex', gap: '100px', marginTop: '20px', marginBottom: '80px' }}>
-          <div style={{ width: '250px' }}>
+        <div className="services-page-solution-row" style={{ display: 'flex', gap: '100px', marginTop: '20px', marginBottom: '80px' }}>
+          <div className="services-page-solution-title" style={{ width: '250px' }}>
             <EditableText path={['services', 'solutions', '0', 'title']} as="p" style={{
               fontFamily: '"Inter", sans-serif',
               fontSize: '14px',
@@ -258,8 +258,8 @@ export default function ServicesPage() {
 
         {/* Section 2 */}
         <MagneticString />
-        <div style={{ display: 'flex', gap: '100px', marginTop: '20px', marginBottom: '80px' }}>
-          <div style={{ width: '250px' }}>
+        <div className="services-page-solution-row" style={{ display: 'flex', gap: '100px', marginTop: '20px', marginBottom: '80px' }}>
+          <div className="services-page-solution-title" style={{ width: '250px' }}>
             <EditableText path={['services', 'solutions', '1', 'title']} as="p" style={{
               fontFamily: '"Inter", sans-serif',
               fontSize: '14px',
@@ -284,8 +284,8 @@ export default function ServicesPage() {
 
         {/* Section 3 */}
         <MagneticString />
-        <div style={{ display: 'flex', gap: '100px', marginTop: '20px' }}>
-          <div style={{ width: '250px' }}>
+        <div className="services-page-solution-row" style={{ display: 'flex', gap: '100px', marginTop: '20px' }}>
+          <div className="services-page-solution-title" style={{ width: '250px' }}>
             <EditableText path={['services', 'solutions', '2', 'title']} as="p" style={{
               fontFamily: '"Inter", sans-serif',
               fontSize: '14px',

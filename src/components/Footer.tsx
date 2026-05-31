@@ -1,7 +1,9 @@
-import { Instagram, Youtube, Github, Facebook, Dribbble } from 'lucide-react';
+import { Instagram, Youtube, Facebook } from 'lucide-react';
 import EditableText from './admin/EditableText';
+import { useSiteData } from '../context/SiteDataContext';
 
 export default function Footer() {
+  const { data, isAdmin, updateData } = useSiteData();
   return (
     <footer
       className="footer-section"
@@ -35,6 +37,7 @@ export default function Footer() {
                   border: '1px solid #2A1F42',
                   borderRadius: '100px',
                   padding: '16px 32px',
+                  marginLeft: '-32px',
                   fontSize: '18px',
                   color: '#F0EBF8',
                   backgroundColor: 'transparent',
@@ -59,6 +62,7 @@ export default function Footer() {
                   border: '1px solid #2A1F42',
                   borderRadius: '100px',
                   padding: '16px 32px',
+                  marginLeft: '-32px',
                   fontSize: '18px',
                   color: '#F0EBF8',
                   backgroundColor: 'transparent',
@@ -100,23 +104,22 @@ export default function Footer() {
               ))}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-              {['Blog', 'Workflow', 'Contacts'].map(link => (
-                <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
-                  style={{
-                    color: '#9B8EC4',
-                    textDecoration: 'none',
-                    fontSize: '18px',
-                    fontFamily: '"Inter", sans-serif',
-                    transition: 'all 0.3s ease',
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.color = '#F0EBF8'; e.currentTarget.style.opacity = '1'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.color = '#9B8EC4'; e.currentTarget.style.opacity = '1'; }}
-                >
-                  {link}
-                </a>
-              ))}
+              <a
+                href="https://wa.me/918131949105"
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  color: '#9B8EC4',
+                  textDecoration: 'none',
+                  fontSize: '18px',
+                  fontFamily: '"Inter", sans-serif',
+                  transition: 'all 0.3s ease',
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = '#F0EBF8'; e.currentTarget.style.opacity = '1'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = '#9B8EC4'; e.currentTarget.style.opacity = '1'; }}
+              >
+                Contacts
+              </a>
             </div>
           </div>
         </div>
@@ -141,10 +144,27 @@ export default function Footer() {
           </div>
 
           <div className="footer-social" style={{ display: 'flex', gap: '16px', paddingRight: '200px' }}>
-            {[Instagram, Youtube, Github, Facebook, Dribbble].map((Icon, i) => (
+            {[
+              { Icon: Instagram, name: 'instagram' },
+              { Icon: Youtube, name: 'youtube' },
+              { Icon: Facebook, name: 'facebook' }
+            ].map(({ Icon, name }, i) => (
               <a
                 key={i}
-                href="#"
+                href={data.footer.socialLinks?.[name as keyof typeof data.footer.socialLinks] || '#'}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) => {
+                  if (isAdmin) {
+                    e.preventDefault();
+                    const currentUrl = data.footer.socialLinks?.[name as keyof typeof data.footer.socialLinks] || '';
+                    const newUrl = prompt(`Enter URL for ${name}:`, currentUrl);
+                    if (newUrl !== null) {
+                      updateData(['footer', 'socialLinks', name], newUrl);
+                    }
+                  }
+                }}
+                title={isAdmin ? `Click to edit ${name} link` : ''}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -156,6 +176,7 @@ export default function Footer() {
                   border: '1px solid #2A1F42',
                   color: '#9B8EC4',
                   transition: 'all 0.3s ease',
+                  cursor: isAdmin ? 'pointer' : 'default',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = '#2A1F42';
